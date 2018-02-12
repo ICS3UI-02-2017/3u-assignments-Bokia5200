@@ -71,12 +71,17 @@ public class RobotExample {
         // move monogram down twice
         monogram.move(2);
         
-        //pick up another thing
+        // pick up another thing
         monogram.pickThing();
         monogram.turnAround();
         
-        //move monogram twice, and drop the thing
+        // move monogram twice, and drop the thing
         monogram.move(2);
         monogram.putThing();
+        
+        // repeat all the past steps
+        monogram.turnAround();
+        monogram.move(2);
+        monogram.pickThing();
     }
 }
