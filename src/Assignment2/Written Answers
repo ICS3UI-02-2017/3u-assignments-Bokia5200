@@ -1,0 +1,12 @@
+1.
+    a) True
+    b) True
+    c) False
+    d) False
+    e) False
+    f) True
+    g) True
+2.
+    The two statements behave the same way because Statement 1 says to turn right if Karel can pick 
+    up the thing and turn left if it cannot. Statement 2 says that if Karel cannot pick up the thing,
+    turn left, and turn right if it can. 
