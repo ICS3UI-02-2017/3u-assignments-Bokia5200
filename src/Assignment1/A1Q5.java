@@ -64,6 +64,6 @@ public class A1Q5 {
         monogram.pickThing();
         monogram.move();
         monogram.pickThing();
-        monogram.turnLeft();        
+        monogram.turnLeft();
     }
 }
