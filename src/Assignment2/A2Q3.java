@@ -23,7 +23,7 @@ public class A2Q3 {
         City bootstown = new City();
 
         // create a robot
-        RobotSE monogram = new RobotSE(bootstown, 3, 5, Direction.NORTH);
+        RobotSE monogram = new RobotSE(bootstown, 3, 5, Direction.WEST);
         
         // make the robot orient North regardless of start direction
         if(monogram.getDirection() ==Direction.SOUTH){
