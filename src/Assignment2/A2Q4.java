@@ -20,13 +20,13 @@ public class A2Q4 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+
         // create a city
         City bootstown = new City();
-        
+
         // create a robot
         RobotSE monogram = new RobotSE(bootstown, 0, 0, Direction.EAST);
-        
+
         // create castle towers
         new Wall(bootstown, 1, 1, Direction.EAST);
         new Wall(bootstown, 1, 1, Direction.NORTH);
@@ -44,7 +44,7 @@ public class A2Q4 {
         new Wall(bootstown, 4, 4, Direction.NORTH);
         new Wall(bootstown, 4, 4, Direction.EAST);
         new Wall(bootstown, 4, 4, Direction.WEST);
-        
+
         // make castle walls
         new Wall(bootstown, 2, 2, Direction.NORTH);
         new Wall(bootstown, 2, 2, Direction.WEST);
@@ -54,9 +54,9 @@ public class A2Q4 {
         new Wall(bootstown, 3, 3, Direction.SOUTH);
         new Wall(bootstown, 3, 2, Direction.SOUTH);
         new Wall(bootstown, 3, 2, Direction.WEST);
-        
+
         // make monogram patrol around castle walls
-        while(true){
+        while (true) {
             monogram.move(2);
             monogram.turnRight();
             monogram.move();
@@ -68,10 +68,6 @@ public class A2Q4 {
             monogram.move(2);
             monogram.turnRight();
         }
-    
 
-         
-        }
-            
     }
-
+}
