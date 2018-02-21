@@ -24,35 +24,30 @@ public class A2Q3 {
 
         // create a robot
         RobotSE monogram = new RobotSE(bootstown, 3, 5, Direction.WEST);
-        
+
         // make the robot orient North regardless of start direction
-        if(monogram.getDirection() ==Direction.SOUTH){
-          monogram.turnAround();  
+        if (monogram.getDirection() == Direction.SOUTH) {
+            monogram.turnAround();
         }
-        if(monogram.getDirection() ==Direction.EAST) {
+        if (monogram.getDirection() == Direction.EAST) {
             monogram.turnLeft();
         }
-        if(monogram.getDirection() == Direction.WEST) {
+        if (monogram.getDirection() == Direction.WEST) {
             monogram.turnRight();
         }
 
         // make monogram return to origin (0, 0)
         while (monogram.getStreet() > 0) {
-            monogram.move(); 
+            monogram.move();
         }
         monogram.turnLeft();
-        
+
         while (monogram.getAvenue() > 0) {
             monogram.move();
         }
-        
-        
-        
-        
-        }
-        
-        }
-    
-    
 
 
+
+
+    }
+}
