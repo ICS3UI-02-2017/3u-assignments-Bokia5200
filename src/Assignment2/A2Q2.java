@@ -42,18 +42,19 @@ public class A2Q2 {
         new Thing(bootstown, 1, 10);
 
         // make monogram complete the race
-        while (!monogram.canPickThing()){
-            if(!monogram.isBesideThing(IPredicate.aWall))
+        while (!monogram.canPickThing()) {
+            if (!monogram.isBesideThing(IPredicate.aWall)) {
                 monogram.turnRight();
-        
-        if(monogram.frontIsClear()){
-            monogram.move();
-        }else{
-            monogram.turnLeft();
-        }
-        }      
+            }
 
-        
+            if (monogram.frontIsClear()) {
+                monogram.move();
+            } else {
+                monogram.turnLeft();
+            }
+        }
+
+
 
     }
 }
