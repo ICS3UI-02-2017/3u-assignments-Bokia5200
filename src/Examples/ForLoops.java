@@ -51,5 +51,15 @@ public class ForLoops {
         x += 5; // adds 5
         
         x -= 10; // subtract 10 shortcut
+        
+        if (monogram.frontIsClear()){
+            if (monogram.canPickThing()){
+                monogram.move();
+            }
+        }
+        // compound statement, both must be true to perform the action
+        if(monogram.frontIsClear() && monogram.canPickThing()) {
+            monogram.move();
+        }
     }
 }
