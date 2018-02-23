@@ -85,7 +85,5 @@ public class Quiz1 {
         monogram.putThing();
         monogram.turnLeft();
         monogram.move();
-
-
     }
 }
