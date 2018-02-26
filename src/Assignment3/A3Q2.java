@@ -7,6 +7,7 @@ package Assignment3;
 import becker.robots.City;
 import becker.robots.Direction;
 import becker.robots.RobotSE;
+import becker.robots.Thing;
 
 /**
  *
@@ -28,6 +29,31 @@ public class A3Q2 {
         // Turn on counters for the things
         bootstown.showThingCounts(true);
         
+        // place 10 things
+        new Thing(bootstown, 1, 1);
+        new Thing(bootstown, 1, 1);
+        new Thing(bootstown, 1, 1);
+        new Thing(bootstown, 1, 1);
+        new Thing(bootstown, 1, 1);
+        new Thing(bootstown, 1, 1);
+        new Thing(bootstown, 1, 1);
+        new Thing(bootstown, 1, 1);
+        new Thing(bootstown, 1, 1);
+        new Thing(bootstown, 1, 1);
         
+        // make monogram pick up all the things individually and place them one intersection over
+        int numberOfMoves = 10;
+        
+        while (numberOfMoves > 0) {
+            monogram.pickThing();
+            monogram.move();
+            monogram.putThing();
+            monogram.turnAround();
+            monogram.move();
+            monogram.turnAround();
+            
+            numberOfMoves = numberOfMoves - 1;
+        }
+          monogram.move();      
     }
 }
