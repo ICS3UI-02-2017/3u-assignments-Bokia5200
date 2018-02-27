@@ -76,6 +76,5 @@ public class A3Q4 {
             monogram.turnLeft();
             monogram.move(3);
         }
-
     }
 }
