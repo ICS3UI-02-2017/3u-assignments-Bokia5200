@@ -67,13 +67,11 @@ public class A3Q4 {
         new Wall(danville, 4, 5, Direction.NORTH);
 
         // Make monogram move around the four squares
-        for (int entireLoop = 0; entireLoop < 4; entireLoop++) {
+        for (int entireLoop = 4; entireLoop > 0; entireLoop--) {
+            for(int firstLoop = 3; firstLoop > 0; firstLoop--){
             monogram.move(3);
             monogram.turnLeft();
-            monogram.move(3);
-            monogram.turnLeft();
-            monogram.move(3);
-            monogram.turnLeft();
+            }
             monogram.move(3);
         }
     }
