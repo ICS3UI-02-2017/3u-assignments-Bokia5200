@@ -28,6 +28,6 @@ public class A4Q3 {
         String four = input.nextLine();
         
         // Read out the numbers to the user on one line
-        System.out.println(one + two + three + four);
+        System.out.println("Your numbers were " + one + ", " + two + ", " + three + ", " + four + ".");
     }
 }
