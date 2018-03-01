@@ -31,6 +31,7 @@ public class A4Q2 {
         // "Try again" loop
         while (inches < 0) {
             System.out.println("Try again...");
+            System.out.print("Please enter the measurement in inches you wish to convert:");
             inches = input.nextDouble();
             cm = 2.54 * inches;
         }
