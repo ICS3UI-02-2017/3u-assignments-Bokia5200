@@ -57,6 +57,5 @@ public class A4Q5 {
         double total = test1 + test2 + test3 + test4 + test5;
         double avg = total/5;
         System.out.println("Average: " + avg + "%");
-
     }
 }
