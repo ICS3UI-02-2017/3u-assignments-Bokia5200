@@ -25,5 +25,17 @@ public class A4Q4 {
         int DJ = input.nextInt();
         System.out.print("How much does it cost to rent the hall? :");
         int hall = input.nextInt();
+        System.out.print("How much do decorations cost? :");
+        int decor = input.nextInt();
+        System.out.print("How much does it cost for the staff? :");
+        int staff = input.nextInt();
+        System.out.print("How much for miscellaneous costs? :");
+        int misc = input.nextInt();
+        
+        // give total cost and amount of tickets needed to break even
+        int total = food + DJ + hall + decor + staff + misc;
+        int tickets = total / 35;
+        Math.round(tickets);
+        System.out.println("The total cost is $" + total + ". You will need to sell " + tickets + " tickets to break even.");
     }
 }
