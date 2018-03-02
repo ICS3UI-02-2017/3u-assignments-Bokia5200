@@ -35,7 +35,6 @@ public class A4Q4 {
         // give total cost and amount of tickets needed to break even
         int total = food + DJ + hall + decor + staff + misc;
         double tickets = total / 35;
-        Math.ceil(tickets);
-        System.out.println("The total cost is $" + total + ". You will need to sell " + tickets + " tickets to break even.");
+        System.out.println("The total cost is $" + total + ". You will need to sell " + Math.ceil(tickets) + " tickets to break even.");
     }
 }
