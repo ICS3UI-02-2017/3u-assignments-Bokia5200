@@ -26,7 +26,7 @@ public class A4Q2 {
         double cm = 2.54 * inches;
         
         // Give the conversion to the user
-        System.out.println(inches + " inches is the same as " + cm + "cm.");
+        System.out.println(inches + " inches is the same as " + cm + " cm.");
         
         // "Try again" loop
         while (inches < 0) {
