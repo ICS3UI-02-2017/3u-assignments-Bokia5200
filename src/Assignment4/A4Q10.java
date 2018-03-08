@@ -48,6 +48,11 @@ public class A4Q10 extends javax.swing.JFrame {
         });
 
         jButton2.setText("C -> F");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -93,11 +98,22 @@ public class A4Q10 extends javax.swing.JFrame {
         // Get temp in fahrenheit, and convert to double, and celsius
         String fahrenheit = F.getText();
         double ftemp = Double.parseDouble(fahrenheit);
-        double ctemp = 5/9 * ftemp + 32;
+        double ctemp = (ftemp - 32) * 5/9;
         
         // Output result to user
         C.setText("" + ctemp);
+        
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // Convert temp in celsius, convert to double, and fahrenheit
+        String celsius = C.getText();
+        double ctemp1 = Double.parseDouble(celsius);
+        double ftemp1 = ctemp1 * 1.8 + 32;
+        
+        // Output result to user
+        F.setText("" + ftemp1);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
