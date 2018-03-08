@@ -24,13 +24,11 @@ public class A4Q7 {
             System.out.print("Enter sum of dice: ");
             int sum = input.nextInt();
             if (sum < 2 || sum > 12) {
-                System.out.println("Please input a number between 2 & 12");
+                System.out.println("You Quit!");
+                System.exit(sum);
             } else {
                 finalsquare = sum + finalsquare;
                 
-                if (sum <= 0) {
-                    System.out.println("You quit!");
-                }
                 if (finalsquare == 54) {
                     finalsquare = 19;
                 }
