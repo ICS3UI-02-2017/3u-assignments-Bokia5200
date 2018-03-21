@@ -32,24 +32,29 @@ public class A5Q1 {
             int length = origWord.length();
             String transWord = "";
             for (int i = 0; i < length; i++) {
-                if (origWord.charAt(i) == 'a' || origWord.charAt(i) == 'e' || origWord.charAt(i) == 'i' || origWord.charAt(i) == 'o' || origWord.charAt(i) == 'u') {
-                    String start = origWord.substring(0, i);
-                    String end = origWord.substring(i);
-
                     // Compute translated word
-                    transWord = start + "ub" + end;
+                    for (i = 0; i < length; i++) {
+                        
+                        if (origWord.charAt(i) == 'a' || origWord.charAt(i) == 'e' || origWord.charAt(i) == 'i' || origWord.charAt(i) == 'o' || origWord.charAt(i) == 'u') {
+                            // Compute the translated word with vowels
+                            transWord = transWord + "ub" + origWord.charAt(i);
+                    }else{
+                           transWord = transWord + origWord.charAt(i); 
+                        }
+                        
                 }
             }
-            for (int i = 0; i < length; i++) {
-                if (transWord.charAt(i) == 'a' || transWord.charAt(i) == 'e' || transWord.charAt(i) == 'i' || transWord.charAt(i) == 'o' || transWord.charAt(i) == 'u') {
-                    String start = transWord.substring(0, i);
-                    String end = transWord.substring(i);
-
-                    // Compute translated word
-                    String transWord1 = start + "ub" + end;
-                }
+            
                 System.out.println(origWord + " in Ubbi Dubbi is: " + transWord);
+//                
+//            }
+//            int length = origWord.length();
+//            String transWord = "";
+//            for (int i = 0; i < length; i++) {
+//                int index = origWord.indexOf("a", i);
+//                    
+//                
+//            }
             }
         }
     }
-}
