@@ -32,29 +32,22 @@ public class A5Q1 {
             int length = origWord.length();
             String transWord = "";
             for (int i = 0; i < length; i++) {
-                    // Compute translated word
-                    for (i = 0; i < length; i++) {
-                        
-                        if (origWord.charAt(i) == 'a' || origWord.charAt(i) == 'e' || origWord.charAt(i) == 'i' || origWord.charAt(i) == 'o' || origWord.charAt(i) == 'u') {
-                            // Compute the translated word with vowels
-                            transWord = transWord + "ub" + origWord.charAt(i);
-                    }else{
-                           transWord = transWord + origWord.charAt(i); 
-                        }
-                        
+                // Build onto the empty string
+                if (origWord.charAt(i) == 'a' 
+                        || origWord.charAt(i) == 'e' 
+                        || origWord.charAt(i) == 'i' 
+                        || origWord.charAt(i) == 'o' 
+                        || origWord.charAt(i) == 'u') {
+                    // Add the letter to the string if it is a vowel, with "ub" in front of it
+                    transWord = transWord + "ub" + origWord.charAt(i);
+                } else {
+                    // Add the letter to the string if it is a consonant 
+                    transWord = transWord + origWord.charAt(i);
                 }
             }
-            
-                System.out.println(origWord + " in Ubbi Dubbi is: " + transWord);
-//                
-//            }
-//            int length = origWord.length();
-//            String transWord = "";
-//            for (int i = 0; i < length; i++) {
-//                int index = origWord.indexOf("a", i);
-//                    
-//                
-//            }
-            }
+            // Tell the user what the translated version of the word is
+            System.out.println(origWord + " in Ubbi Dubbi is: " + transWord);
+            break;
         }
     }
+}
