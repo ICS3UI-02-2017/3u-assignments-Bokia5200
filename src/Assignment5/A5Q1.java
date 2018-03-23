@@ -33,15 +33,16 @@ public class A5Q1 {
             String transWord = "";
             for (int i = 0; i < length; i++) {
                 // Build onto the empty string
-                if (origWord.charAt(i) == 'a' 
-                        || origWord.charAt(i) == 'e' 
-                        || origWord.charAt(i) == 'i' 
-                        || origWord.charAt(i) == 'o' 
-                        || origWord.charAt(i) == 'u') {
-                    // Add the letter to the string if it is a vowel, with "ub" in front of it
-                    transWord = transWord + "ub" + origWord.charAt(i);
+                if (origWord.charAt(i) == 'a' || origWord.charAt(i) == 'e' || origWord.charAt(i) == 'i' || origWord.charAt(i) == 'o' || origWord.charAt(i) == 'u') {
+                    if (origWord.charAt(i + 1) == 'a' || origWord.charAt(i + 1) == 'e' || origWord.charAt(i + 1) == 'i' || origWord.charAt(i + 1) == 'o' || origWord.charAt(i + 1) == 'u') {
+                        // Add the letter to the string if there are two vowels, with "ub" in front of it
+                        transWord = transWord + "ub" + origWord.charAt(i) + origWord.charAt(i + 1);
+                        i++;
+                    } else {
+                        // Add the letter to the string if it is a consonant 
+                        transWord = transWord + "ub" + origWord.charAt(i);
+                    }
                 } else {
-                    // Add the letter to the string if it is a consonant 
                     transWord = transWord + origWord.charAt(i);
                 }
             }
