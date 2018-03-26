@@ -30,6 +30,7 @@ public class A5Q1 {
 
             // Use a for loop to go through each character, looking for a vowel
             int length = origWord.length();
+            origWord = origWord + " ";
             String transWord = "";
             for (int i = 0; i < length; i++) {
                 // Build onto the empty string
