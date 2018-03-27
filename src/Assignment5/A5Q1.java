@@ -36,14 +36,21 @@ public class A5Q1 {
                 // Build onto the empty string
                 if (origWord.charAt(i) == 'a' || origWord.charAt(i) == 'e' || origWord.charAt(i) == 'i' || origWord.charAt(i) == 'o' || origWord.charAt(i) == 'u') {
                     if (origWord.charAt(i + 1) == 'a' || origWord.charAt(i + 1) == 'e' || origWord.charAt(i + 1) == 'i' || origWord.charAt(i + 1) == 'o' || origWord.charAt(i + 1) == 'u') {
-                        // Add the letter to the string if there are two vowels, with "ub" in front of it
-                        transWord = transWord + "ub" + origWord.charAt(i) + origWord.charAt(i + 1);
-                        i++;
+                        if (origWord.charAt(i + 2) == 'a' || origWord.charAt(i + 2) == 'e' || origWord.charAt(i + 2) == 'i' || origWord.charAt(i + 2) == 'o' || origWord.charAt(i + 2) == 'u') {
+                            // Add "ub" into the string if there are three straight vowels
+                            transWord = transWord + "ub" + origWord.charAt(i) + origWord.charAt(i + 1) + origWord.charAt(i + 2);
+                            i = i + 2;
+                        } else {
+                            // Add "ub" into the string if there are two vowels
+                            transWord = transWord + "ub" + origWord.charAt(i) + origWord.charAt(i + 1);
+                            i++;
+                        }
                     } else {
-                        // Add the letter to the string if it is a consonant 
+                        // Add "ub" into the string if there is one vowel
                         transWord = transWord + "ub" + origWord.charAt(i);
                     }
                 } else {
+                    // Add the letter into the string if it is a consonant
                     transWord = transWord + origWord.charAt(i);
                 }
             }
