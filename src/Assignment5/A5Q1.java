@@ -35,7 +35,7 @@ public class A5Q1 {
             for (int i = 0; i < length; i++) {
                 // Build onto the empty string
                 if (origWord.charAt(i) == 'a' || origWord.charAt(i) == 'e' || origWord.charAt(i) == 'i' || origWord.charAt(i) == 'o' || origWord.charAt(i) == 'u') {
-                    if (origWord.charAt(i + 1) == 'a' || origWord.charAt(i + 1) == 'e' || origWord.charAt(i + 1) == 'i' || origWord.charAt(i + 1) == 'o' || origWord.charAt(i + 1) == 'u') {
+                    if (origWord.charAt(i - 1) == 'a' || origWord.charAt(i - 1) == 'e' || origWord.charAt(i - 1) == 'i' || origWord.charAt(i - 1) == 'o' || origWord.charAt(i - 1) == 'u') {
                         if (origWord.charAt(i + 2) == 'a' || origWord.charAt(i + 2) == 'e' || origWord.charAt(i + 2) == 'i' || origWord.charAt(i + 2) == 'o' || origWord.charAt(i + 2) == 'u') {
                             // Add "ub" into the string if there are three straight vowels
                             transWord = transWord + "ub" + origWord.charAt(i) + origWord.charAt(i + 1) + origWord.charAt(i + 2);
