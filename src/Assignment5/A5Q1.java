@@ -30,27 +30,26 @@ public class A5Q1 {
 
             // Use a for loop to go through each character, looking for a vowel
             int length = origWord.length();
-            origWord = origWord + " ";
             String transWord = "";
-            for (int i = 0; i < length; i++) {
-                // Build onto the empty string
+            int i = 0;
+            // If the letter starts with a vowel, add a "ub" before it
+            if (origWord.startsWith("a") || origWord.startsWith("e") || origWord.startsWith("i") || origWord.startsWith("o") || origWord.startsWith("u")) {
+                transWord = "ub" + origWord.charAt(i) + transWord;
+                i = i + 1;
+            }
+            for (i = i; i < length; i++) {
+                // Check if the letter is a vowel
                 if (origWord.charAt(i) == 'a' || origWord.charAt(i) == 'e' || origWord.charAt(i) == 'i' || origWord.charAt(i) == 'o' || origWord.charAt(i) == 'u') {
+                    // Check if the letter behind the vowel is a vowel
                     if (origWord.charAt(i - 1) == 'a' || origWord.charAt(i - 1) == 'e' || origWord.charAt(i - 1) == 'i' || origWord.charAt(i - 1) == 'o' || origWord.charAt(i - 1) == 'u') {
-                        if (origWord.charAt(i + 2) == 'a' || origWord.charAt(i + 2) == 'e' || origWord.charAt(i + 2) == 'i' || origWord.charAt(i + 2) == 'o' || origWord.charAt(i + 2) == 'u') {
-                            // Add "ub" into the string if there are three straight vowels
-                            transWord = transWord + "ub" + origWord.charAt(i) + origWord.charAt(i + 1) + origWord.charAt(i + 2);
-                            i = i + 2;
-                        } else {
-                            // Add "ub" into the string if there are two vowels
-                            transWord = transWord + "ub" + origWord.charAt(i) + origWord.charAt(i + 1);
-                            i++;
-                        }
+                        // If it is, leave it as is
+                        transWord = transWord + origWord.charAt(i);
                     } else {
-                        // Add "ub" into the string if there is one vowel
+                        // Add "ub" and the vowels into the string 
                         transWord = transWord + "ub" + origWord.charAt(i);
                     }
                 } else {
-                    // Add the letter into the string if it is a consonant
+                    // If it is a consonant, leave it as is
                     transWord = transWord + origWord.charAt(i);
                 }
             }
