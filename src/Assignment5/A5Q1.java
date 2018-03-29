@@ -35,7 +35,7 @@ public class A5Q1 {
             // If the letter starts with a vowel, add a "ub" before it
             if (origWord.startsWith("a") || origWord.startsWith("e") || origWord.startsWith("i") || origWord.startsWith("o") || origWord.startsWith("u")) {
                 transWord = "ub" + origWord.charAt(i) + transWord;
-                i = i + 1;
+                i += 1;
             }
             for (i = i; i < length; i++) {
                 // Check if the letter is a vowel
