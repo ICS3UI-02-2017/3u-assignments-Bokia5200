@@ -25,15 +25,16 @@ public class A6Q1 {
 
         // Calculate the sum of all the marks
         int[] results = new int[students];
-        int sum = 0;
+        double sum = 0;
         System.out.println("Enter the marks: ");
         for (int i = 0; i < results.length; i++) {
-            int marks = input.nextInt();
+            double marks = input.nextDouble();
             sum = sum + marks + results[i];
         }
         // Calculate the average of the test results, and output it to the user
         double avg = sum / students;
-        System.out.println("The class average is: " + avg + "%");
+        double avgR = Math.round(avg*100)/100.0;
+        System.out.println("The class average is: " + avgR + "%");
     }
 }
 
