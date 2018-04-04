@@ -20,7 +20,7 @@ public class A6Q1 {
         Scanner input = new Scanner(System.in);
 
         // Ask the user for the number of students in the class
-        System.out.println("How many students are in the class? ");
+        System.out.print("How many students are in the class? ");
         int students = input.nextInt();
 
         // Calculate the sum of all the marks
