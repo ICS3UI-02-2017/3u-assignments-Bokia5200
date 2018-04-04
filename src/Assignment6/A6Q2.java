@@ -23,7 +23,7 @@ public class A6Q2 {
         System.out.print("How many people's heights are you measuring? ");
         int people = input.nextInt();
 
-        // Calculate the average of the heights using an array
+        // Calculate the sum of the heights using an array
         double[] heights = new double[people];
         double sumH = 0;
         System.out.println("Enter the heights in centimetres: ");
