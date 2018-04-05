@@ -21,9 +21,22 @@ public class A6Q3 {
         
         // Tell the user to write two numbers
         System.out.println("Enter two integers:  ");
-        int numbers = input.nextInt();
+        
         
         // Sort the numbers in ascending order
         int[] num = new int[2];
+        for (int i = 0; i < num.length; i++) {
+            int numbers = input.nextInt();
+            num [i] = numbers;
+        }
+        for (int i = 0; i < num.length; i++) {
+            if (num [i] < num [i + 1]) {
+                System.out.println("The integers in ascending order are: " + num [i] + " " + num [i + 1]);
+            } else {
+                System.out.println("The integers in ascending order are: " + num [i + 1] + " " + num [i]);
+            }
+            break;
+        }
+        
     }
 }
