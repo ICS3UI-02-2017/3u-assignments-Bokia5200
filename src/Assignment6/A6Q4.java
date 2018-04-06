@@ -16,27 +16,32 @@ public class A6Q4 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
-        Scanner input = new Scanner (System.in);
-        
+
+        Scanner input = new Scanner(System.in);
+
         // Tell the user to input ten numbers
         System.out.println("Enter ten marks: ");
-        
         // Create an array for the ten numbers to be inputted into
-        double[] marks = new double[10];
-        for (int i = 0; i < marks.length; i++) {
-            double num = input.nextDouble();
-            marks [i] = num;
-        }
-        double n = 0;
-        for (int i = 0; i < marks.length; i++) {
-            if (marks [i] > marks [i++]){
-               n = n + marks [i];
-                System.out.println("The marks from lowest to highest are: " + n);
+        int[] marks = new int[10];
+        
+        for (int i = 0; i < marks.length - 1; i++) {
+            int numbers = input.nextInt();
+            marks[i] = numbers;
+            for (int j = i + 1; j < marks.length; j++) {
+                if (marks[i] > marks[j]) {
+                    int numT = marks[i];
+                    marks[i] = marks[j];
+                    marks[j] = numT;
+                }
+                
             }
-            
+            System.out.println("The marks in ascending order are: " + marks[i]); 
+
         }
-        
-        
+
+
+
+
+
     }
 }
