@@ -22,7 +22,7 @@ public class A6Q4 {
         // Tell the user to input ten numbers
         System.out.println("Enter ten marks: ");
         // Create an array for the ten numbers to be inputted into
-        int[] marks = new int[10];
+        int[] marks = new int[11];
         
         for (int i = 0; i < marks.length - 1; i++) {
             int numbers = input.nextInt();
@@ -31,17 +31,12 @@ public class A6Q4 {
                 if (marks[i] > marks[j]) {
                     int numT = marks[i];
                     marks[i] = marks[j];
-                    marks[j] = numT;
+                    marks[j] = numT; 
                 }
-                
-            }
-            System.out.println("The marks in ascending order are: " + marks[i]); 
-
+            }   
         }
-
-
-
-
-
+        for (int i = 0; i < marks.length - 1; i++) {
+            
+        }
     }
 }
