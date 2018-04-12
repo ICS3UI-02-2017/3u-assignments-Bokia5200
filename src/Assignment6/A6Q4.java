@@ -23,10 +23,12 @@ public class A6Q4 {
         System.out.println("Enter ten marks: ");
         // Create an array for the ten numbers to be inputted into
         int[] marks = new int[10];
+        // Input the numbers into the array
         for (int i = 0; i < marks.length; i++) {
             int numbers = input.nextInt();
             marks[i] = numbers;
         }
+        // Go through all the numbers and sort them into ascending order
         for (int i = 0; i < marks.length - 1; i++) {
             for (int j = i + 1; j < marks.length; j++) {
                 if (marks[i] > marks[j]) {
@@ -36,6 +38,7 @@ public class A6Q4 {
                 }
             }
         }
+        // Output the marks to the user
             System.out.println("The marks in ascending order are: " + Arrays.toString(marks));
     }
 }
