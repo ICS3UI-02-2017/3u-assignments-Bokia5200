@@ -44,7 +44,7 @@ public class A6Q6 {
         for (int i = 0; i < marks.length; i++) {
             sum = sum + marks[i];
         }
-        double avg = sum / 2;
+        double avg = sum / size;
         // Output the lowest and the highest mark
         System.out.println("The lowest mark is: " + marks[0] + ". The highest mark is: " + marks[(int) size - 1] + ". The average is: " + avg);
     }
