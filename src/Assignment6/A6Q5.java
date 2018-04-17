@@ -46,23 +46,19 @@ public class A6Q5 {
         System.out.println("The marks in ascending order are: " + Arrays.toString(marks));
 
         if (numberM % 2 == 1) {
-            double oddM = numberM/2;
+            double oddM = numberM / 2;
             double Odd = marks[(int) oddM];
             System.out.println("The median is: " + Odd);
-        } else{
-            double evenM = numberM/2 + 0.5;
-            System.out.println(evenM);
-            double num1 = Math.ceil(evenM);
-            double num2 = Math.floor(evenM);
-            System.out.println(num1);
-            System.out.println(num2);
-            double Even1 = marks[(int)num1];
-            double Even2 = marks[(int)num2];
+        } else {
+            double evenM1 = numberM / 2;
+            double evenM2 = (numberM/2) - 1;
+            double Even1 = marks[(int) evenM1];
+            double Even2 = marks[(int) evenM2];
             double totalMed = Even1 + Even2;
-            double avgMed = totalMed/2;
+            double avgMed = totalMed / 2;
             System.out.println("The median is: " + avgMed);
         }
-            
-        
+
+
     }
 }
