@@ -24,52 +24,52 @@ public class A6Q7 {
             numbers[i] = x;
             x += 1;
         }
-        for (int i = 0; i < numbers.length; i++) {
-            if (numbers[i] % 2 == 0) {
-                numbers[i] = 0;
-                numbers[0] = 2;
-            }
-            if (numbers[i] % 3 == 0) {
-                numbers[i] = 0;
-                numbers[1] = 3;
-            }
-            if (numbers[i] % 5 == 0) {
-                numbers[i] = 0;
-                numbers[3] = 5;
-            }
-            if (numbers[i] % 7 == 0) {
-                numbers[i] = 0;
-                numbers[5] = 7;
-            }
-            if (numbers[i] % 9 == 0) {
-                numbers[i] = 0;
-            }
-            if (numbers[i] % 11 == 0) {
-                numbers[i] = 0;
-                numbers[9] = 11;
-            }
-            if (numbers[i] % 13 == 0) {
-                numbers[i] = 0;
-                numbers[11] = 13;
-            }
-        }
-        int[] prime = new int[999];
-        for (int i = 0; i < prime.length; i++) {
-            if (numbers[i] != 0) {
-                numbers[i] = prime[i];
+//        for (int i = 0; i < numbers.length; i++) {
+//            if (numbers[i] % 2 == 0) {
+//                numbers[i] = 0;
+//                numbers[0] = 2;
+//            }
+//            if (numbers[i] % 3 == 0) {
+//                numbers[i] = 0;
+//                numbers[1] = 3;
+//            }
+//            if (numbers[i] % 5 == 0) {
+//                numbers[i] = 0;
+//                numbers[3] = 5;
+//            }
+//            if (numbers[i] % 7 == 0) {
+//                numbers[i] = 0;
+//                numbers[5] = 7;
+//            }
+//            if (numbers[i] % 9 == 0) {
+//                numbers[i] = 0;
+//            }
+//            if (numbers[i] % 11 == 0) {
+//                numbers[i] = 0;
+//                numbers[9] = 11;
+//            }
+//            if (numbers[i] % 13 == 0) {
+//                numbers[i] = 0;
+//                numbers[11] = 13;
+//            }
+//        }
+//        int[] prime = new int[999];
+//        for (int i = 0; i < prime.length; i++) {
+//            if (numbers[i] != 0) {
+//                numbers[i] = prime[i];
+//            }
+//        }
+        
+        for (int p = 2; p < numbers.length; p++) {
+            for (int i = 0; i < numbers.length; i++) {
+                if (numbers[i] % p == 0) {
+                    numbers[i] = 0;
+                    numbers[0] = 2;
+                } else if (numbers[i] % p != 0) {
+                    
+                }
             }
         }
         System.out.println(Arrays.toString(numbers));
-        //        for (int i = 0; i < numbers.length; i++) {
-//            for (int p = 2; p < numbers.length; p++) {
-//                if (numbers[i] % p == 0) {
-//                    boolean isPrime = false;
-//                    numbers[i] = 0;
-//                    numbers[0] = 2;
-//                } else if (numbers[i] % p != 0) {
-//                    boolean isPrime = true;
-//                }
-//            }
-//        }
     }
 }
