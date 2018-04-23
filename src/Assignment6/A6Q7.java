@@ -17,59 +17,26 @@ public class A6Q7 {
      */
     public static void main(String[] args) {
 
-        // Create an array and input all the numbers from 2 to 1000
-        int[] numbers = new int[999];
-        int x = 2;
-        for (int i = 0; i < numbers.length; i++) {
-            numbers[i] = x;
-            x += 1;
+        // Create a boolean array, and set all values to true
+        boolean[] numbers = new boolean[999];
+        for (int x = 0; x < numbers.length; x++) {
+            numbers[x] = true;
         }
-//        for (int i = 0; i < numbers.length; i++) {
-//            if (numbers[i] % 2 == 0) {
-//                numbers[i] = 0;
-//                numbers[0] = 2;
-//            }
-//            if (numbers[i] % 3 == 0) {
-//                numbers[i] = 0;
-//                numbers[1] = 3;
-//            }
-//            if (numbers[i] % 5 == 0) {
-//                numbers[i] = 0;
-//                numbers[3] = 5;
-//            }
-//            if (numbers[i] % 7 == 0) {
-//                numbers[i] = 0;
-//                numbers[5] = 7;
-//            }
-//            if (numbers[i] % 9 == 0) {
-//                numbers[i] = 0;
-//            }
-//            if (numbers[i] % 11 == 0) {
-//                numbers[i] = 0;
-//                numbers[9] = 11;
-//            }
-//            if (numbers[i] % 13 == 0) {
-//                numbers[i] = 0;
-//                numbers[11] = 13;
-//            }
-//        }
-//        int[] prime = new int[999];
-//        for (int i = 0; i < prime.length; i++) {
-//            if (numbers[i] != 0) {
-//                numbers[i] = prime[i];
-//            }
-//        }
-        
-        for (int p = 2; p < numbers.length; p++) {
-            for (int i = 0; i < numbers.length; i++) {
-                if (numbers[i] % p == 0) {
-                    numbers[i] = 0;
-                    numbers[0] = 2;
-                } else if (numbers[i] % p != 0) {
-                    
+        // Start at the first prime number, find its multiples and set it to false
+        for (int p = 2; p * p <= 999; p++) {
+            // If the number is still marked as true, determine whether or not it is prime
+            if (numbers[p] == true) {
+                for (int y = p * 2; y < 999; y += p) {
+                    // Set it to false if it is determined to not be prime
+                    numbers[y] = false;
                 }
             }
         }
-        System.out.println(Arrays.toString(numbers));
+        // Output all the prime numbers that are still marked as true
+        for (int i = 2; i < 999; i++){
+            if (numbers[i] == true) {
+                System.out.print(i + " ");
+            }
+        }   
     }
 }
