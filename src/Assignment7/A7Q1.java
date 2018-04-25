@@ -24,7 +24,7 @@ public class A7Q1 {
         
         Scanner input = new Scanner(System.in);
         
-        // Ask the user for the radius of the circle
+        // Ask the user for the radius of the circle 
         System.out.println("What is the radius of the circle?");
         double cArea = circleArea(input.nextDouble());
         // Output the area to the user
