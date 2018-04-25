@@ -13,6 +13,7 @@ import java.util.Scanner;
 public class A7Q2 {
 
     public static void examGrade(double m) {
+        // Marking layout
         if (m < 50) {
             System.out.println("Your grade is: F");
         } else {
@@ -32,11 +33,6 @@ public class A7Q2 {
                 }
             }
         }
-
-
-
-
-
     }
 
     /**
