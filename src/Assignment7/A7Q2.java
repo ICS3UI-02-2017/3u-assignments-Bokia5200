@@ -16,13 +16,13 @@ public class A7Q2 {
         if (m < 50) {
             System.out.println("Your grade is: F");
         } else {
-            if (m <= 50 || m <= 59) {
+            if (m >= 50 && m <= 59) {
                 System.out.println("Your grade is: D");
             } else {
-                if (m <= 60 || m <= 69) {
+                if (m >= 60 && m <= 69) {
                     System.out.println("Your grade is: C");
                 } else {
-                    if (m <= 70 || m <= 79) {
+                    if (m >= 70 && m <= 79) {
                         System.out.println("Your grade is: B");
                     } else {
                         if (m >= 80) {
