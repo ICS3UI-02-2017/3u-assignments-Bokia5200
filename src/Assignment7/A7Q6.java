@@ -19,6 +19,11 @@ public class A7Q6 {
                 b = i;   
             }   
         }
+        for (int j = 0; j > -10; j--) {
+            if (n % -10 == j) {
+                b = j * -1;
+            }
+        }
         return b;
     }
     /**
