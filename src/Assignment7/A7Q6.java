@@ -13,18 +13,18 @@ import java.util.Scanner;
 public class A7Q6 {
 
     public static int lastDigit (int n) {
-        int b = 0;
+        int x = 0;
         for (int i = 0; i < 10; i++) {
             if (n % 10 == i) {
-                b = i;   
+                x = i;   
             }   
         }
         for (int j = 0; j > -10; j--) {
             if (n % -10 == j) {
-                b = j * -1;
+                x = j * -1;
             }
         }
-        return b;
+        return x;
     }
     /**
      * @param args the command line arguments
