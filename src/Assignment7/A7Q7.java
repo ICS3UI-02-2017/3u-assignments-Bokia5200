@@ -14,16 +14,16 @@ public class A7Q7 {
 
     public static int firstDigit(int n) {
         // Divide the number by 10 until it is less than 10, and then return it
-        int first = 0;
+        int x = 0;
         while (n >= 10) {
             n = n / 10;
-            first = n;
+            x = n;
         }
         while (n <= -10) {
             n = n / 10;
-            first = n * -1;
+            x = n * -1;
         }
-        return first;
+        return x;
     }
 
     /**
