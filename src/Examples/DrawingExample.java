@@ -30,7 +30,7 @@ public class DrawingExample extends JComponent implements ActionListener {
     // sets the framerate and delay for our game
     // this calculates the number of milliseconds per frame
     // you just need to select an approproate framerate
-    int desiredFPS = 60;
+    int desiredFPS = 61;
     int desiredTime = Math.round((1000 / desiredFPS));
     
     // timer used to run the game loop
@@ -115,8 +115,8 @@ public class DrawingExample extends JComponent implements ActionListener {
         
         // Make Pac-man
         g.setColor(Color.yellow);
-        // (width, height, start angle, amount to rotate)
-        g.fillArc(100, 400, 100, 100, 45, 270);
+        // (x, y, width, height, start angle, amount to rotate)
+        g.fillArc(100, 400, 100, 100, 45, 180);
         
         g.setColor(Color.black);
         //(x, y, x, y)
