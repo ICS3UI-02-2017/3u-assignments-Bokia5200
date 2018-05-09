@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -37,6 +38,7 @@ public class SmileyFace extends JComponent implements ActionListener {
     Color skin = new Color(158, 110, 42);
     Color brown = new Color(68, 44, 9);
     Color mouth = new Color(107, 1, 71);
+    Color tongue = new Color(255, 155, 225);
 
     // GAME VARIABLES END HERE    
     // Constructor to create the Frame and place the panel in
@@ -74,6 +76,7 @@ public class SmileyFace extends JComponent implements ActionListener {
     // NOTE: This is already double buffered!(helps with framerate/speed)
     @Override
     public void paintComponent(Graphics g) {
+        Graphics2D g2d = (Graphics2D)g;
         // always clear the screen first!
         g.clearRect(0, 0, WIDTH, HEIGHT);
 
@@ -84,6 +87,7 @@ public class SmileyFace extends JComponent implements ActionListener {
         // Create the face
         g.setColor(Color.YELLOW);
         g.fillOval(150, 35, 550, 550);
+        
         // Create the eyeballs
         g.setColor(Color.black);
         g.fillArc(230, 190, 145, 180, 0, 180);
@@ -101,6 +105,17 @@ public class SmileyFace extends JComponent implements ActionListener {
         g.fillArc(265, 282, 320, 230, 180, 180);
         g.setColor(mouth);
         g.fillArc(275, 300, 300, 205, 180, 180);
+        
+        // Create the tongue
+        g.setColor(tongue);
+        g.fillArc(450, 425, 100, 100, 25, 180);
+        g.setColor(tongue);
+        g2d.translate(455, 495);
+        g2d.rotate(Math.toRadians(-26));
+        g.fillArc(0, -18, 100, 36, 180, 180);
+        g2d.rotate(Math.toRadians(26));
+        g2d.translate(-455, -495);
+        
 
 
         // GAME DRAWING ENDS HERE
