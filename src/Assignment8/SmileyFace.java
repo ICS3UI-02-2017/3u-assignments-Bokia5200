@@ -35,10 +35,23 @@ public class SmileyFace extends JComponent implements ActionListener {
     // this is what keeps our time running smoothly :)
     Timer gameTimer;
     // YOUR GAME VARIABLES WOULD GO HERE
-    Color skin = new Color(158, 110, 42);
+    
     Color brown = new Color(68, 44, 9);
     Color mouth = new Color(107, 1, 71);
     Color tongue = new Color(255, 155, 225);
+    
+    // Variables for left eye movement
+    int leftEye = 260;
+    
+    // How much to translate the eyes each time
+    int eyeMovement = +1;
+    
+    // Variables for right eye movement
+    int rightEye = 490;
+    
+    // Variable for lefteyebrow rotation
+    int leftBrow = 26;
+    int browMovement = -1;
 
     // GAME VARIABLES END HERE    
     // Constructor to create the Frame and place the panel in
@@ -95,10 +108,11 @@ public class SmileyFace extends JComponent implements ActionListener {
         g.setColor(Color.white);
         g.fillArc(235, 195, 140, 175, 0, 180);
         g.fillArc(465, 195, 140, 175, 0, 180);
+        
         // Create the irises
         g.setColor(Color.BLACK);
-        g.fillOval(260, 200, 50, 50);
-        g.fillOval(490, 200, 50, 50);
+        g.fillOval(leftEye, 200, 50, 50);
+        g.fillOval(rightEye, 200, 50, 50);
 
         // Create the mouth
         g.setColor(Color.BLACK);
@@ -116,8 +130,15 @@ public class SmileyFace extends JComponent implements ActionListener {
         g2d.rotate(Math.toRadians(26));
         g2d.translate(-455, -495);
         
-
-
+        // Create eyebrows
+        g.setColor(brown);
+        g2d.translate(225, 162);
+        g2d.rotate(Math.toRadians(-leftBrow));
+        g.fillRoundRect(0, -12, 150, 25, 10, 10);
+        g2d.rotate(Math.toRadians(leftBrow));
+        g2d.translate(-225, -162);
+        
+        g.fillRoundRect(460, 150, 150, 25, 10, 10);
         // GAME DRAWING ENDS HERE
     }
 
@@ -130,6 +151,34 @@ public class SmileyFace extends JComponent implements ActionListener {
     // The main game loop
     // In here is where all the logic for my game will go
     public void gameLoop() {
+        // Movements for the left eye
+        leftEye = leftEye + eyeMovement;
+        
+        if(leftEye > 300){
+            eyeMovement = -1;
+        }
+        if(leftEye < 260){
+            eyeMovement = 1;
+        }
+        // Movements for the right eye
+        rightEye = rightEye + eyeMovement;
+        
+        if (rightEye > 530){
+            eyeMovement = -1;
+        }
+        if (rightEye < 490){
+            eyeMovement = 1;
+        }
+        
+        // Movements for the left eyebrow
+        leftBrow = leftBrow + browMovement;
+        
+        if (leftBrow == 0){
+            browMovement = -1;
+        }
+        if (leftBrow == 0){
+            browMovement = 1;
+        }
     }
 
     // Used to implement any of the Mouse Actions
