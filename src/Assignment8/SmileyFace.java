@@ -49,11 +49,11 @@ public class SmileyFace extends JComponent implements ActionListener {
     // Variables for right eye movement
     int rightEye = 490;
     
-    // Variable for lefteyebrow rotation
+    // Variable for left eyebrow rotation
     int leftBrow = 0;
     int browMovement = +1;
     
-    int rightBrow = 0;
+    
 
     // GAME VARIABLES END HERE    
     // Constructor to create the Frame and place the panel in
@@ -132,7 +132,7 @@ public class SmileyFace extends JComponent implements ActionListener {
         g2d.rotate(Math.toRadians(26));
         g2d.translate(-455, -495);
         
-        // Create eyebrows
+        // Create left eyebrows
         g.setColor(brown);
         g2d.translate(225, 162);
         g2d.rotate(Math.toRadians(-leftBrow));
@@ -140,11 +140,9 @@ public class SmileyFace extends JComponent implements ActionListener {
         g2d.rotate(Math.toRadians(leftBrow));
         g2d.translate(-225, -162);
         
-        g2d.translate(460, 162);
-        g2d.rotate(Math.toRadians(-rightBrow));
-        g.fillRoundRect(0, -12, 150, 25, 10, 10);
-        g2d.rotate(Math.toRadians(rightBrow));
-        g2d.translate(-460, -162);
+        // Right Eyebrow
+        g.fillRoundRect(460, 150, 150, 25, 10, 10);
+        
         
         // GAME DRAWING ENDS HERE
     }
