@@ -30,7 +30,7 @@ public class DrawingExample extends JComponent implements ActionListener {
     // sets the framerate and delay for our game
     // this calculates the number of milliseconds per frame
     // you just need to select an approproate framerate
-    int desiredFPS = 61;
+    int desiredFPS = 60;
     int desiredTime = Math.round((1000 / desiredFPS));
     
     // timer used to run the game loop
@@ -40,9 +40,15 @@ public class DrawingExample extends JComponent implements ActionListener {
     // YOUR GAME VARIABLES WOULD GO HERE
     Color purple = new Color(128, 0, 128);
     
+    int mouseX = 0;
+    int mouseY = 0;
     
-
-
+    // Game controls
+    boolean moveUp = false;
+    boolean moveDown = false;
+    
+    int pacmanY = 400;
+    
     // GAME VARIABLES END HERE    
 
     
@@ -110,15 +116,15 @@ public class DrawingExample extends JComponent implements ActionListener {
         g.fillRoundRect(300, 75, 150, 50, 20, 20);
         
         // Draw a polygon
-        int[] triangleX = {500, 600, 450};
-        int[] triangleY = {400, 500, 500};
+        int[] triangleX = {mouseX, 600, 450};
+        int[] triangleY = {mouseY, 500, 500};
         //(Array of X points, Array of Y points, # of points)
         g.fillPolygon(triangleX, triangleY, 3);
         
         // Make Pac-man
         g.setColor(Color.yellow);
         // (x, y, width, height, start angle, amount to rotate)
-        g.fillArc(100, 400, 100, 100, 45, 270);
+        g.fillArc(100, pacmanY, 100, 100, 45, 270);
         
         g.setColor(Color.black);
         //(x, y, x, y)
@@ -137,6 +143,11 @@ public class DrawingExample extends JComponent implements ActionListener {
     // In here is where all the logic for my game will go
     public void gameLoop() {
         
+        if (moveUp){
+            pacmanY = pacmanY - 3;
+        }else if(moveDown){
+            pacmanY = pacmanY + 3;
+        }
     }
 
     // Used to implement any of the Mouse Actions
@@ -145,13 +156,13 @@ public class DrawingExample extends JComponent implements ActionListener {
         // if a mouse button has been pressed down
         @Override
         public void mousePressed(MouseEvent e) {
-
+            
         }
 
         // if a mouse button has been released
         @Override
         public void mouseReleased(MouseEvent e) {
-
+            
         }
 
         // if the scroll wheel has been moved
@@ -163,7 +174,9 @@ public class DrawingExample extends JComponent implements ActionListener {
         // if the mouse has moved positions
         @Override
         public void mouseMoved(MouseEvent e) {
-
+            // Set the mouse coordinates
+            mouseX = e.getX();
+            mouseY = e.getY();
         }
     }
 
@@ -173,12 +186,28 @@ public class DrawingExample extends JComponent implements ActionListener {
         // if a key has been pressed down
         @Override
         public void keyPressed(KeyEvent e) {
+            // Get the key code
+            int keyCode = e.getKeyCode();
+            // Which key is being pressed
+            if (keyCode == KeyEvent.VK_W){
+                moveUp = true;
+            }else if (keyCode == KeyEvent.VK_S){
+                moveDown = true;
+            }
 
         }
 
         // if a key has been released
         @Override
         public void keyReleased(KeyEvent e) {
+            // Get the key code
+            int keyCode = e.getKeyCode();
+            // Which key is being pressed
+            if (keyCode == KeyEvent.VK_W){
+                moveUp = false;
+            }else if (keyCode == KeyEvent.VK_S){
+                moveDown = false;
+            }
 
         }
     }
