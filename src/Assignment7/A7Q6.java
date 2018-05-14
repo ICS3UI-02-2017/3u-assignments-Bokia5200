@@ -15,7 +15,7 @@ public class A7Q6 {
     public static int lastDigit (int n) {
         int x = 0;
         for (int i = 0; i < 10; i++) {
-            if (n / 10 == i) {
+            if (n % 10 == i) {
                 x = i;   
             }   
         }
