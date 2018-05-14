@@ -39,6 +39,8 @@ public class DrawingExample extends JComponent implements ActionListener {
 
     // YOUR GAME VARIABLES WOULD GO HERE
     Color purple = new Color(128, 0, 128);
+    
+    
 
 
     // GAME VARIABLES END HERE    
@@ -116,7 +118,7 @@ public class DrawingExample extends JComponent implements ActionListener {
         // Make Pac-man
         g.setColor(Color.yellow);
         // (x, y, width, height, start angle, amount to rotate)
-        g.fillArc(100, 400, 100, 100, 45, 180);
+        g.fillArc(100, 400, 100, 100, 45, 270);
         
         g.setColor(Color.black);
         //(x, y, x, y)
