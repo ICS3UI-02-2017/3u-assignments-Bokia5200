@@ -94,7 +94,7 @@ public class MyGame extends JComponent implements ActionListener {
         // Make the shooter
         g.setColor(Color.WHITE);
         int[] triangleX = {shooterX1, shooterX2, shooterX3};
-        int[] triangleY = {450, 400, 450};
+        int[] triangleY = {450, 375, 450};
         g.fillPolygon(triangleX, triangleY, 3);
         
 		
