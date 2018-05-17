@@ -3,6 +3,7 @@ package MyGame;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Point;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import java.awt.event.ActionEvent;
@@ -12,6 +13,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
+import java.util.ArrayList;
 import javax.swing.Timer;
 
 /**
@@ -47,8 +49,14 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
     int shooterX2 = 500;
     int shooterX3 = 550;
     
-    // Coordinates for the enemy
-    double e1 = 100;
+    // For the enemies
+    ArrayList<Point> enemies = new ArrayList<>();
+//    double e1 = 100;
+    
+    // For the bullets
+    ArrayList<Point> bullets = new ArrayList<>();
+    int bulletY = 625;
+    
     // GAME VARIABLES END HERE    
 
     
@@ -102,7 +110,18 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
         g.fillPolygon(triangleX, triangleY, 3);
         
         // Make the enemy ships
-        g.fillRect(100, (int) e1, 50, 50);
+        for (int i = 0; i < enemies.size(); i++){
+            Point p = enemies.get(i);
+            g.fillRect(p.x, p.y, 100, 100);
+        }
+        
+        // Make the shooters
+        for(int i = 0; i < bullets.size(); i++){
+            Point p = bullets.get(i);
+            g.fillRect(p.x, p.y, 20, 40);
+        }
+        
+        
 		
         // GAME DRAWING ENDS HERE
     }
@@ -117,6 +136,8 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
     // The main game loop
     // In here is where all the logic for my game will go
     public void gameLoop() {
+        
+        
         
         // Movements for the shooter
         if (moveLeft){
@@ -140,7 +161,13 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
         }
         
         // Movements for the enemies
-        e1 += 0.5;
+        for (int i = 0; i < enemies.size(); i++){
+            Point p = enemies.get(i);
+            p.y += 0.5;
+        }
+        
+        // Movements for the bullets
+        
         
     }
 
@@ -188,6 +215,12 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
             }
             if (keyCode == KeyEvent.VK_RIGHT){
                 moveRight = true;
+            }
+            
+            // To shoot a bullet
+            if(keyCode == KeyEvent.VK_SPACE){
+                // Create a new bullet everytime the spacebar is pressed
+                bullets.add(new Point(shooterX2,bulletY));
             }
         }
 
