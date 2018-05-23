@@ -93,6 +93,7 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
 
         // GAME DRAWING GOES HERE
         // Create a background
+        g.setColor(Color.BLACK);
         g.fillRect(0, 0, WIDTH, HEIGHT);
 
         // Make the shooter
