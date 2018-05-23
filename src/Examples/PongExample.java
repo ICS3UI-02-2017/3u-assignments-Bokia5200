@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -54,6 +55,14 @@ public class PongExample extends JComponent implements ActionListener {
     boolean paddle2Up = false;
     boolean paddle2Down = false;
     int paddleSpeed = 5;
+    
+    // Player scores
+    int score1 = 0;
+    int score2 = 0;
+    
+    // Create a custom font
+    Font biggerFont = new Font("arial", Font.BOLD, 36);
+    
     // GAME VARIABLES END HERE    
 
     
@@ -105,6 +114,10 @@ public class PongExample extends JComponent implements ActionListener {
         g.fillRect(paddle1.x, paddle1.y, paddle1.width, paddle1.height);
         g.fillRect(paddle2.x, paddle2.y, paddle2.width, paddle2.height);
         
+        // Draw the scores
+        g.setFont(biggerFont);
+        g.drawString("" + score1, WIDTH/2 - 50, 50);
+        g.drawString("" + score2, WIDTH/2 + 50, 50);
         // Draw the ball
         g.fillRect(ball.x, ball.y, ball.width, ball.height);
 		
@@ -147,6 +160,16 @@ public class PongExample extends JComponent implements ActionListener {
         }else if(paddle1Down){
             paddle1.y = paddle1.y + paddleSpeed;
         }
+        // Is paddle too far up?
+        if(paddle1.y < 0){
+            paddle1.y = 0;
+        }else{
+            // has the bottom gone too far
+            if(paddle1.y + paddle1.height > HEIGHT){
+                paddle1.y = HEIGHT - paddle1.height;
+            }
+        }
+        
         // Player 2 control
         if(paddle2Up){
             paddle2.y = paddle2.y - paddleSpeed;
@@ -156,11 +179,37 @@ public class PongExample extends JComponent implements ActionListener {
     }
 
     private void checkForCollision() {
-        
+        // Collision with bottom & top
+        if(ball.y < 0){
+            ballAngle = ballAngle * -1;
+        }
+        if(ball.y + ball.height > HEIGHT){
+            ballAngle = ballAngle * -1;
+        }
+        // NOTE: Make sure to not go over 360 degrees
+        // Does the ball hit paddle 1
+        if(ball.intersects(paddle1)){
+            ballAngle = (180 + ballAngle * -1)% 360;
+        }
+        // Does the ball hit paddle 2
+        if(ball.intersects(paddle2)){
+            ballAngle = (180 + ballAngle * -1) % 360;
+        }
     }
 
     private void checkForGoal() {
-        
+        // Ball off left hand side
+        if(ball.x < 0){
+            score2++;
+            ball.x = WIDTH/2 - ball.width/2;
+            ball.y = HEIGHT/2 - ball.height/2;
+        }
+        // Ball hits right hand side
+        if(ball.x + ball.width > WIDTH){
+            score1++;
+            ball.x = WIDTH/2 - ball.width/2;
+            ball.y = HEIGHT/2 - ball.height/2;
+        }
     }
 
     // Used to implement any of the Mouse Actions
