@@ -203,12 +203,12 @@ public class PongExample extends JComponent implements ActionListener {
             if(keyCode == KeyEvent.VK_W){
                 paddle1Up = true;
             }else if(keyCode == KeyEvent.VK_S){
-                paddle1Down = false;
+                paddle1Down = true;
             }
             if(keyCode == KeyEvent.VK_UP){
                 paddle2Up = true;
             }else if(keyCode == KeyEvent.VK_DOWN){
-                paddle2Down = false;
+                paddle2Down = true;
             }
         }
 
@@ -221,12 +221,12 @@ public class PongExample extends JComponent implements ActionListener {
             if(keyCode == KeyEvent.VK_W){
                 paddle1Up = false;
             }else if(keyCode == KeyEvent.VK_S){
-                paddle1Down = true;
+                paddle1Down = false;
             }
             if(keyCode == KeyEvent.VK_UP){
                 paddle2Up = false;
             }else if(keyCode == KeyEvent.VK_DOWN){
-                paddle2Down = true;
+                paddle2Down = false;
             }
 
         }
