@@ -37,7 +37,6 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
     // this is what keeps our time running smoothly :)
     Timer gameTimer;
     // YOUR GAME VARIABLES WOULD GO HERE
-    
     // Controls to move the shooter
     boolean moveLeft = false;
     boolean moveRight = false;
@@ -45,14 +44,12 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
     int shooterX1 = 450;
     int shooterX2 = 500;
     int shooterX3 = 550;
-    
     // For the enemies
     ArrayList<Rectangle> enemies = new ArrayList<>();
-
     // For the bullets
     ArrayList<Rectangle> bullets = new ArrayList<>();
     long enemyTimerLastTick = System.currentTimeMillis();
-    int enemyDelay = 35;
+    int enemyDelay = 55;
 
     // GAME VARIABLES END HERE    
     // Constructor to create the Frame and place the panel in
@@ -109,10 +106,11 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
             Rectangle p = enemies.get(i);
             g.fillRect(p.x, p.y, p.width, p.height);
         }
-        
+
         // Make the bullets
         for (int i = 0; i < bullets.size(); i++) {
             Rectangle p = bullets.get(i);
+            // WHAT IS THE WIDTH AND HEIGHT?
             g.fillRect(p.x, p.y, p.width, p.height);
         }
         // GAME DRAWING ENDS HERE
@@ -127,7 +125,7 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
             enemies.add(new Rectangle(i, 100, 50, 50));
         }
         // Make the second row of enemies
-        for (int i = 50; i< 900; i += 105) {
+        for (int i = 50; i < 900; i += 105) {
             enemies.add(new Rectangle(i, 200, 50, 50));
         }
     }
@@ -167,8 +165,12 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
     private void shootBullets() {
         // Movements for the bullets
         for (int i = 0; i < bullets.size(); i++) {
-            Rectangle p = bullets.get(i);
-            p.y -= 0.5;
+            Rectangle b = bullets.get(i);
+            // REMEMBER TO MAKE MISSED BULLETS DISAPPEAR OFF SCREEN
+            b.y -= .75;
+//            if (b.y + b.height == 0) {
+//                b.y = b.y - b.height;
+//            }
         }
     }
 
@@ -177,8 +179,8 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
         if (System.currentTimeMillis() > enemyTimerLastTick + enemyDelay) {
             // Movements for the enemies
             for (int i = 0; i < enemies.size(); i++) {
-                Rectangle p = enemies.get(i);
-                p.y += 1 ;
+                Rectangle e = enemies.get(i);
+                e.y += 1;
             }
             enemyTimerLastTick = System.currentTimeMillis();
         }
@@ -186,15 +188,18 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
 
     private void checkForCollision() {
         for (int i = 0; i < bullets.size(); i++) {
-            Rectangle b = bullets.get(i);
-            Rectangle e = enemies.get(i);
-            if(b.intersects(e)){
-                b.y = -100;
-                b.x = -100;
+            for (int j = 0; j < enemies.size(); j++) {
+                Rectangle b = bullets.get(i);
+                Rectangle e = enemies.get(j);
+                if (b.intersects(e)) {
+                    b.y = -100;
+                    b.x = -100;
+                    e.y = -100;
+                    e.x = -100;
+                }
             }
-            
+
         }
-        
     }
 
     // Used to implement any of the Mouse Actions
