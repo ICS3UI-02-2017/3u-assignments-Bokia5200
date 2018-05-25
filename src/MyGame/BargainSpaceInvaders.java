@@ -110,7 +110,6 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
         // Make the bullets
         for (int i = 0; i < bullets.size(); i++) {
             Rectangle p = bullets.get(i);
-            // WHAT IS THE WIDTH AND HEIGHT?
             g.fillRect(p.x, p.y, p.width, p.height);
         }
         // GAME DRAWING ENDS HERE
@@ -246,6 +245,7 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
             // To shoot a bullet
             if (keyCode == KeyEvent.VK_SPACE) {
                 // Create a new bullet everytime the spacebar is pressed
+                // MAKE IT START IN THE MIDDLE OF shooterX2
                 bullets.add(new Rectangle(shooterX2, 625, 25, 50));
             }
         }
