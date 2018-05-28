@@ -2,6 +2,7 @@ package MyGame;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -26,32 +27,48 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
     // Height and Width of our game
     static final int WIDTH = 1000;
     static final int HEIGHT = 800;
+    
     //Title of the window
     String title = "Bargain Space Invaders (WORKING TITLE)";
+    
     // sets the framerate and delay for our game
     // this calculates the number of milliseconds per frame
     // you just need to select an approproate framerate
     int desiredFPS = 60;
     int desiredTime = Math.round((1000 / desiredFPS));
+    
     // timer used to run the game loop
     // this is what keeps our time running smoothly :)
     Timer gameTimer;
+    
     // YOUR GAME VARIABLES WOULD GO HERE
+    
     // Controls to move the shooter
     boolean moveLeft = false;
     boolean moveRight = false;
+    
     // Coordinates for the shooter
     int shooterX1 = 450;
     int shooterX2 = 500;
     int shooterX3 = 550;
+    
+    // For the shooter/enemy collision
+    Rectangle shooter = new Rectangle(450, 625, 100, 75);
+    
     // For the enemies
     ArrayList<Rectangle> enemies = new ArrayList<>();
+    
     // For the bullets
     ArrayList<Rectangle> bullets = new ArrayList<>();
     long enemyTimerLastTick = System.currentTimeMillis();
     int enemyDelay = 55;
+    
+    // Game over screen
+    boolean gameOver = false;
+    Font biggerFont = new Font("times new roman", Font.BOLD, 124);
 
-    // GAME VARIABLES END HERE    
+    // GAME VARIABLES END HERE   
+    
     // Constructor to create the Frame and place the panel in
     // You will learn more about this in Grade 12 :)
     public BargainSpaceInvaders() {
@@ -100,7 +117,7 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
         int[] triangleX = {shooterX1, shooterX2, shooterX3};
         int[] triangleY = {700, 625, 700};
         g.fillPolygon(triangleX, triangleY, 3);
-
+        
         // Make the enemy ships
         for (int i = 0; i < enemies.size(); i++) {
             Rectangle p = enemies.get(i);
@@ -111,6 +128,12 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
         for (int i = 0; i < bullets.size(); i++) {
             Rectangle p = bullets.get(i);
             g.fillRect(p.x, p.y, p.width, p.height);
+        }
+        
+        // Make the game over screen
+        if(gameOver == true){
+            g.setFont(biggerFont);
+            g.drawString("GAME OVER", 0, HEIGHT/2);
         }
         // GAME DRAWING ENDS HERE
     }
@@ -132,10 +155,9 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
     // The main game loop
     // In here is where all the logic for my game will go
     public void gameLoop() {
-        moveShooter();
-        shootBullets();
-        moveEnemies();
-        checkForCollision();
+//        startScreen();
+        levelOne();
+        
     }
 
     private void moveShooter() {
@@ -166,10 +188,7 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
         for (int i = 0; i < bullets.size(); i++) {
             Rectangle b = bullets.get(i);
             // REMEMBER TO MAKE MISSED BULLETS DISAPPEAR OFF SCREEN
-            b.y -= .75;
-//            if (b.y + b.height == 0) {
-//                b.y = b.y - b.height;
-//            }
+            b.y -= 1;
         }
     }
 
@@ -186,6 +205,7 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
     }
 
     private void checkForCollision() {
+        // Collision with bullets and enemies
         for (int i = 0; i < bullets.size(); i++) {
             for (int j = 0; j < enemies.size(); j++) {
                 Rectangle b = bullets.get(i);
@@ -197,8 +217,28 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
                     e.x = -100;
                 }
             }
-
         }
+        // Collision with enemies and shooter
+        for (int x = 0; x < enemies.size(); x++) {
+            Rectangle e  = enemies.get(x);
+            if(e.intersects(shooter)){
+                shooterX1 = -100;
+                shooterX2 = -100;
+                shooterX3 = -100;
+                gameOver = true;
+            }
+        }
+    }
+
+    private void startScreen() {
+        
+    }
+
+    private void levelOne() {
+        moveShooter();
+        shootBullets();
+        moveEnemies();
+        checkForCollision();
     }
 
     // Used to implement any of the Mouse Actions
@@ -245,8 +285,7 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
             // To shoot a bullet
             if (keyCode == KeyEvent.VK_SPACE) {
                 // Create a new bullet everytime the spacebar is pressed
-                // MAKE IT START IN THE MIDDLE OF shooterX2
-                bullets.add(new Rectangle(shooterX2, 625, 25, 50));
+                bullets.add(new Rectangle(shooterX2 - 12, 625, 25, 50));
             }
         }
 
