@@ -43,6 +43,12 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
     
     // YOUR GAME VARIABLES WOULD GO HERE
     
+    // Title Screen
+    Font titleFont = new Font("times new roman", Font.CENTER_BASELINE, 70);
+    
+    // Level select screen
+    boolean levelSelect = false;
+    boolean one = false;
     // Controls to move the shooter
     boolean moveLeft = false;
     boolean moveRight = false;
@@ -65,7 +71,10 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
     
     // Game over screen
     boolean gameOver = false;
+    boolean restart = false;
     Font biggerFont = new Font("times new roman", Font.BOLD, 124);
+    Font timesNewRoman = new Font("times new roman", Font.ITALIC, 36);
+    
 
     // GAME VARIABLES END HERE   
     
@@ -112,7 +121,14 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, WIDTH, HEIGHT);
 
+        // Start Screen
+        g.setColor(Color.white);
+        g.setFont(titleFont);
+        g.drawString("BARGAIN SPACE INVADERS", 18, HEIGHT/2);
+        
         // Make the shooter
+        g.setColor(Color.yellow);
+        g.fillRect(shooter.x, shooter.y, shooter.width, shooter.height);
         g.setColor(Color.WHITE);
         int[] triangleX = {shooterX1, shooterX2, shooterX3};
         int[] triangleY = {700, 625, 700};
@@ -133,10 +149,14 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
         // Make the game over screen
         if(gameOver == true){
             g.setFont(biggerFont);
-            g.drawString("GAME OVER", 0, HEIGHT/2);
+            g.drawString("GAME OVER", 105, HEIGHT/2);
+            g.setFont(timesNewRoman);
+            g.drawString("Press ENTER to restart", 300, HEIGHT/2 + 100);
         }
+        
         // GAME DRAWING ENDS HERE
     }
+    
 
     // This method is used to do any pre-setup you might need to do
     // This is run before the game loop begins!
@@ -166,10 +186,12 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
             shooterX1 -= 3;
             shooterX2 -= 3;
             shooterX3 -= 3;
+            shooter.x -= 3;
         } else if (moveRight) {
             shooterX1 += 3;
             shooterX2 += 3;
             shooterX3 += 3;
+            shooter.x += 3;
         }
         if (shooterX1 > WIDTH) {
             shooterX1 = -100;
@@ -187,7 +209,6 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
         // Movements for the bullets
         for (int i = 0; i < bullets.size(); i++) {
             Rectangle b = bullets.get(i);
-            // REMEMBER TO MAKE MISSED BULLETS DISAPPEAR OFF SCREEN
             b.y -= 1;
         }
     }
@@ -198,7 +219,7 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
             // Movements for the enemies
             for (int i = 0; i < enemies.size(); i++) {
                 Rectangle e = enemies.get(i);
-                e.y += 1;
+                e.y += 5;
             }
             enemyTimerLastTick = System.currentTimeMillis();
         }
@@ -239,6 +260,9 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
         shootBullets();
         moveEnemies();
         checkForCollision();
+//        if(restart == true){
+//            levelOne();
+//        }
     }
 
     // Used to implement any of the Mouse Actions
@@ -287,6 +311,11 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
                 // Create a new bullet everytime the spacebar is pressed
                 bullets.add(new Rectangle(shooterX2 - 12, 625, 25, 50));
             }
+            
+            // To restart
+//            if (keyCode == KeyEvent.VK_ENTER) {
+//                restart = true;
+//            }
         }
 
         // if a key has been released
