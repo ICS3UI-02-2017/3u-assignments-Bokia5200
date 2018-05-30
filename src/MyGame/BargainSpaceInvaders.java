@@ -44,11 +44,16 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
     // YOUR GAME VARIABLES WOULD GO HERE
     
     // Title Screen
+    boolean titleScreen = true;
     Font titleFont = new Font("times new roman", Font.CENTER_BASELINE, 70);
+    Rectangle playGame = new Rectangle(250, 450, 450, 50);
+    int mouseX = 0;
+    int mouseY = 0;
     
     // Level select screen
     boolean levelSelect = false;
     boolean one = false;
+    
     // Controls to move the shooter
     boolean moveLeft = false;
     boolean moveRight = false;
@@ -74,9 +79,8 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
     boolean restart = false;
     Font biggerFont = new Font("times new roman", Font.BOLD, 124);
     Font timesNewRoman = new Font("times new roman", Font.ITALIC, 36);
-    
 
-    // GAME VARIABLES END HERE   
+    // GAME VARIABLES END HERE 
     
     // Constructor to create the Frame and place the panel in
     // You will learn more about this in Grade 12 :)
@@ -122,41 +126,49 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
         g.fillRect(0, 0, WIDTH, HEIGHT);
 
         // Start Screen
-        g.setColor(Color.white);
-        g.setFont(titleFont);
-        g.drawString("BARGAIN SPACE INVADERS", 18, HEIGHT/2);
-        
-        // Make the shooter
-        g.setColor(Color.yellow);
-        g.fillRect(shooter.x, shooter.y, shooter.width, shooter.height);
-        g.setColor(Color.WHITE);
-        int[] triangleX = {shooterX1, shooterX2, shooterX3};
-        int[] triangleY = {700, 625, 700};
-        g.fillPolygon(triangleX, triangleY, 3);
-        
-        // Make the enemy ships
-        for (int i = 0; i < enemies.size(); i++) {
-            Rectangle p = enemies.get(i);
-            g.fillRect(p.x, p.y, p.width, p.height);
+        if (titleScreen == true) {
+            g.setColor(Color.white);
+            g.setFont(titleFont);
+            g.drawString("BARGAIN SPACE INVADERS", 18, HEIGHT / 2);
+            g.setColor(Color.white);
+            g.fillRect(playGame.x, playGame.y, playGame.width, playGame.height);
+            g.setColor(Color.black);
+            g.setFont(timesNewRoman);
+            g.drawString("Press 'Enter' to start playing", 250, 485);
         }
 
-        // Make the bullets
-        for (int i = 0; i < bullets.size(); i++) {
-            Rectangle p = bullets.get(i);
-            g.fillRect(p.x, p.y, p.width, p.height);
+        // Run the level
+        if (one == true) {
+            // Make the shooter
+            g.setColor(Color.WHITE);
+            int[] triangleX = {shooterX1, shooterX2, shooterX3};
+            int[] triangleY = {700, 625, 700};
+            g.fillPolygon(triangleX, triangleY, 3);
+
+            // Make the enemy ships
+            for (int i = 0; i < enemies.size(); i++) {
+                Rectangle p = enemies.get(i);
+                g.fillRect(p.x, p.y, p.width, p.height);
+            }
+
+            // Make the bullets
+            for (int i = 0; i < bullets.size(); i++) {
+                Rectangle p = bullets.get(i);
+                g.fillRect(p.x, p.y, p.width, p.height);
+            }
+
+            // Make the game over screen
+            if (restart == true) {
+                g.setFont(biggerFont);
+                g.drawString("GAME OVER", 105, HEIGHT / 2);
+                g.setFont(timesNewRoman);
+                g.drawString("Press ENTER to restart", 300, HEIGHT / 2 + 100);
+            }
         }
-        
-        // Make the game over screen
-        if(gameOver == true){
-            g.setFont(biggerFont);
-            g.drawString("GAME OVER", 105, HEIGHT/2);
-            g.setFont(timesNewRoman);
-            g.drawString("Press ENTER to restart", 300, HEIGHT/2 + 100);
-        }
-        
+
+
         // GAME DRAWING ENDS HERE
     }
-    
 
     // This method is used to do any pre-setup you might need to do
     // This is run before the game loop begins!
@@ -175,9 +187,9 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
     // The main game loop
     // In here is where all the logic for my game will go
     public void gameLoop() {
-//        startScreen();
-        levelOne();
-        
+        startScreen();
+//        levelOne();
+
     }
 
     private void moveShooter() {
@@ -241,8 +253,8 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
         }
         // Collision with enemies and shooter
         for (int x = 0; x < enemies.size(); x++) {
-            Rectangle e  = enemies.get(x);
-            if(e.intersects(shooter)){
+            Rectangle e = enemies.get(x);
+            if (e.intersects(shooter)) {
                 shooterX1 = -100;
                 shooterX2 = -100;
                 shooterX3 = -100;
@@ -252,7 +264,9 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
     }
 
     private void startScreen() {
-        
+        if (one == true) {
+            levelOne();
+        }
     }
 
     private void levelOne() {
@@ -260,9 +274,13 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
         shootBullets();
         moveEnemies();
         checkForCollision();
-//        if(restart == true){
-//            levelOne();
-//        }
+        if (gameOver == true) {
+            one = false;
+            restart = true;
+        }
+        if (restart == true) {
+            startScreen();
+        }
     }
 
     // Used to implement any of the Mouse Actions
@@ -299,6 +317,12 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
             // Get the keycode
             int keyCode = e.getKeyCode();
 
+            // Start the level
+            if (keyCode == KeyEvent.VK_ENTER) {
+                titleScreen = false;
+                one = true;
+            }
+
             // To move the shooter
             if (keyCode == KeyEvent.VK_LEFT) {
                 moveLeft = true;
@@ -311,11 +335,14 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
                 // Create a new bullet everytime the spacebar is pressed
                 bullets.add(new Rectangle(shooterX2 - 12, 625, 25, 50));
             }
-            
+
+
+
             // To restart
-//            if (keyCode == KeyEvent.VK_ENTER) {
-//                restart = true;
-//            }
+            if (keyCode == KeyEvent.VK_ESCAPE) {
+                restart = true;
+
+            }
         }
 
         // if a key has been released
