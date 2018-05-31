@@ -27,53 +27,41 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
     // Height and Width of our game
     static final int WIDTH = 1000;
     static final int HEIGHT = 800;
-    
     //Title of the window
     String title = "Bargain Space Invaders (WORKING TITLE)";
-    
     // sets the framerate and delay for our game
     // this calculates the number of milliseconds per frame
     // you just need to select an approproate framerate
     int desiredFPS = 60;
     int desiredTime = Math.round((1000 / desiredFPS));
-    
     // timer used to run the game loop
     // this is what keeps our time running smoothly :)
     Timer gameTimer;
-    
     // YOUR GAME VARIABLES WOULD GO HERE
-    
     // Title Screen
     boolean titleScreen = true;
     Font titleFont = new Font("times new roman", Font.CENTER_BASELINE, 70);
     Rectangle playGame = new Rectangle(250, 450, 450, 50);
     int mouseX = 0;
     int mouseY = 0;
-    
     // Level select screen
     boolean levelSelect = false;
     boolean one = false;
-    
     // Controls to move the shooter
     boolean moveLeft = false;
     boolean moveRight = false;
-    
     // Coordinates for the shooter
     int shooterX1 = 450;
     int shooterX2 = 500;
     int shooterX3 = 550;
-    
     // For the shooter/enemy collision
     Rectangle shooter = new Rectangle(450, 625, 100, 75);
-    
     // For the enemies
     ArrayList<Rectangle> enemies = new ArrayList<>();
-    
     // For the bullets
     ArrayList<Rectangle> bullets = new ArrayList<>();
     long enemyTimerLastTick = System.currentTimeMillis();
     int enemyDelay = 55;
-    
     // Game over screen
     boolean gameOver = false;
     boolean restart = false;
@@ -81,7 +69,6 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
     Font timesNewRoman = new Font("times new roman", Font.ITALIC, 36);
 
     // GAME VARIABLES END HERE 
-    
     // Constructor to create the Frame and place the panel in
     // You will learn more about this in Grade 12 :)
     public BargainSpaceInvaders() {
@@ -134,12 +121,14 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
             g.fillRect(playGame.x, playGame.y, playGame.width, playGame.height);
             g.setColor(Color.black);
             g.setFont(timesNewRoman);
-            g.drawString("Press 'Enter' to start playing", 250, 485);
+            g.drawString("Press 'Enter' to start playing", 270, 485);
         }
 
         // Run the level
         if (one == true) {
             // Make the shooter
+//            g.setColor(Color.yellow);
+//            g.fillRect(shooter.x, shooter.y, shooter.width, shooter.height);
             g.setColor(Color.WHITE);
             int[] triangleX = {shooterX1, shooterX2, shooterX3};
             int[] triangleY = {700, 625, 700};
@@ -156,17 +145,15 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
                 Rectangle p = bullets.get(i);
                 g.fillRect(p.x, p.y, p.width, p.height);
             }
-
-            // Make the game over screen
-            if (restart == true) {
-                g.setFont(biggerFont);
-                g.drawString("GAME OVER", 105, HEIGHT / 2);
-                g.setFont(timesNewRoman);
-                g.drawString("Press ENTER to restart", 300, HEIGHT / 2 + 100);
-            }
         }
-
-
+        // Make the game over screen
+        if (gameOver == true) {
+            g.setColor(Color.WHITE);
+            g.setFont(biggerFont);
+            g.drawString("GAME OVER", 105, HEIGHT / 2);
+            g.setFont(timesNewRoman);
+            g.drawString("Press ESCAPE to restart", 300, HEIGHT / 2 + 100);
+        }
         // GAME DRAWING ENDS HERE
     }
 
@@ -187,8 +174,21 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
     // The main game loop
     // In here is where all the logic for my game will go
     public void gameLoop() {
-        startScreen();
-//        levelOne();
+        if (one == true) {
+            titleScreen = false;
+            levelOne();
+        }
+        if (gameOver == true) {
+            one = false;
+        }
+
+    }
+
+    private void levelOne() {
+        moveShooter();
+        shootBullets();
+        moveEnemies();
+        checkForCollision();
 
     }
 
@@ -209,11 +209,13 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
             shooterX1 = -100;
             shooterX2 = -50;
             shooterX3 = 0;
+            shooter.x = -100;
         }
         if (shooterX3 < 0) {
             shooterX1 = 1000;
             shooterX2 = 1050;
             shooterX3 = 1100;
+            shooter.x = 1000;
         }
     }
 
@@ -255,31 +257,12 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
         for (int x = 0; x < enemies.size(); x++) {
             Rectangle e = enemies.get(x);
             if (e.intersects(shooter)) {
+                System.out.println("hit");
                 shooterX1 = -100;
                 shooterX2 = -100;
                 shooterX3 = -100;
                 gameOver = true;
             }
-        }
-    }
-
-    private void startScreen() {
-        if (one == true) {
-            levelOne();
-        }
-    }
-
-    private void levelOne() {
-        moveShooter();
-        shootBullets();
-        moveEnemies();
-        checkForCollision();
-        if (gameOver == true) {
-            one = false;
-            restart = true;
-        }
-        if (restart == true) {
-            startScreen();
         }
     }
 
@@ -319,7 +302,6 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
 
             // Start the level
             if (keyCode == KeyEvent.VK_ENTER) {
-                titleScreen = false;
                 one = true;
             }
 
@@ -336,11 +318,31 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
                 bullets.add(new Rectangle(shooterX2 - 12, 625, 25, 50));
             }
 
-
-
             // To restart
             if (keyCode == KeyEvent.VK_ESCAPE) {
-                restart = true;
+                if (gameOver == true) {
+                    titleScreen = true;
+                    gameOver = false;
+                    int shooterX1 = 450;
+                    int shooterX2 = 500;
+                    int shooterX3 = 550;
+                    int[] triangleX = {shooterX1, shooterX2, shooterX3};
+                    int[] triangleY = {700, 625, 700};
+                    for (int i = 0; i < enemies.size(); i++) {
+                        Rectangle p = enemies.get(i);
+                        for (int j = 50; j < 900; j += 105){
+                            p.x = j;
+                            p.y = 100;
+                        }
+                        
+                    }
+
+                    // Make the bullets
+                    for (int i = 0; i < bullets.size(); i++) {
+                        Rectangle p = bullets.get(i);
+                        
+                    }
+                }
 
             }
         }
