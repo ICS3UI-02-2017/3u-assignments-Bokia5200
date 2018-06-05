@@ -27,58 +27,49 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
     // Height and Width of our game
     static final int WIDTH = 1000;
     static final int HEIGHT = 800;
-    
     //Title of the window
     String title = "Bargain Space Invaders (WORKING TITLE)";
-    
     // sets the framerate and delay for our game
     // this calculates the number of milliseconds per frame
     // you just need to select an approproate framerate
     int desiredFPS = 60;
     int desiredTime = Math.round((1000 / desiredFPS));
-    
     // timer used to run the game loop
     // this is what keeps our time running smoothly :)
     Timer gameTimer;
-    
     // YOUR GAME VARIABLES WOULD GO HERE
     // Title Screen
     boolean titleScreen = true;
     Font titleFont = new Font("times new roman", Font.CENTER_BASELINE, 70);
-    
     // Rectangle playGame = new Rectangle(250, 450, 450, 50);
     int mouseX = 0;
     int mouseY = 0;
-    
     // Level select screen
     boolean levelSelect = false;
-    Font levels = new Font("times new roman", Font.PLAIN, 200);
+    Font levels = new Font("times new roman", Font.PLAIN, 250);
     boolean one = false;
-    
+    boolean two = false;
+    boolean three = false;
+    boolean four = false;
+    boolean five = false;
     // Controls to move the shooter
     boolean moveLeft = false;
     boolean moveRight = false;
-    
     // Coordinates for the shooter
     int shooterX1 = 450;
     int shooterX2 = 500;
     int shooterX3 = 550;
-    
     // For the shooter/enemy collision
     Rectangle shooter = new Rectangle(450, 625, 100, 75);
-    
     // For the enemies
     ArrayList<Rectangle> enemies = new ArrayList<>();
     long enemyTimerLastTick = System.currentTimeMillis();
     int enemyDelay = 55;
-    
     // For the bullets
     ArrayList<Rectangle> bullets = new ArrayList<>();
     int bulletDelay = 0;
-    
     // YOU WON! screen
     boolean youWon = false;
-    
     // Game over screen
     boolean gameOver = false;
     boolean restart = false;
@@ -86,7 +77,6 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
     Font timesNewRoman = new Font("times new roman", Font.ITALIC, 36);
 
     // GAME VARIABLES END HERE .
-    
     // Constructor to create the Frame and place the panel in
     // You will learn more about this in Grade 12 :)
     public BargainSpaceInvaders() {
@@ -130,72 +120,75 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, WIDTH, HEIGHT);
 
-//        // Start Screen
-//        if (titleScreen == true) {
+        // Start Screen
+        if (titleScreen == true) {
+            g.setColor(Color.white);
+            g.setFont(titleFont);
+            g.drawString("BARGAIN SPACE INVADERS", 18, HEIGHT / 2);
 //            g.setColor(Color.white);
-//            g.setFont(titleFont);
-//            g.drawString("BARGAIN SPACE INVADERS", 18, HEIGHT / 2);
-////            g.setColor(Color.white);
-////            g.fillRect(playGame.x, playGame.y, playGame.width, playGame.height);
-//            g.setColor(Color.WHITE);
-//            g.setFont(timesNewRoman);
-//            // Fix the wording
-//            g.drawString("Press 'Enter' to start playing", 270, 485);
-//        }
-        
-       // if (levelSelect == true){
-        
-        
+//            g.fillRect(playGame.x, playGame.y, playGame.width, playGame.height);
             g.setColor(Color.WHITE);
-            g.fillRect(100, 100, 200, 600);
-            g.fillRect(400, 100, 200, 600);
-            g.fillRect(700, 100, 200, 600);
+            g.setFont(timesNewRoman);
+            // Fix the wording
+            g.drawString("Press 'Enter' to start playing", 270, 485);
+        }
+
+        // Draw the level select screen
+        if (levelSelect == true) {
+            g.setColor(Color.WHITE);
+            g.fillRoundRect(100, 100, 200, 250, 40, 40);
+            g.fillRoundRect(400, 100, 200, 250, 40, 40);
+            g.fillRoundRect(700, 100, 200, 250, 40, 40);
+            g.fillRoundRect(250, 400, 200, 250, 40, 40);
+            g.fillRoundRect(550, 400, 200, 250, 40, 40);
             g.setFont(levels);
             g.setColor(Color.BLACK);
-            g.drawString("1", 200, 300);
-            
-       // }
+            g.drawString("1", 135, 300);
+            g.drawString("2", 440, 300);
+            g.drawString("3", 740, 300);
+            g.drawString("4", 290, 600);
+            g.drawString("5", 590, 600);
+        }
 
-//        // Run the level
-//        if (one == true) {
-//            // Make the shooter
-//            // g.setColor(Color.yellow);
-//            // g.fillRect(shooter.x, shooter.y, shooter.width, shooter.height);
-//            g.setColor(Color.WHITE);
-//            int[] triangleX = {shooterX1, shooterX2, shooterX3};
-//            int[] triangleY = {700, 625, 700};
-//            g.fillPolygon(triangleX, triangleY, 3);
-//
-//            // Make the enemy ships
-//            for (int i = 0; i < enemies.size(); i++) {
-//                Rectangle p = enemies.get(i);
-//                g.fillRect(p.x, p.y, p.width, p.height);
-//            }
-//
-//            // Make the bullets
-//            for (int i = 0; i < bullets.size(); i++) {
-//                Rectangle p = bullets.get(i);
-//                g.fillRect(p.x, p.y, p.width, p.height);
-//            }
-//        }
-//        // Make a YOU WON! screen
-//        if (youWon == true) {
-//            g.setColor(Color.WHITE);
-//            g.setFont(biggerFont);
-//            g.drawString("YOU WON!", 175, HEIGHT / 2);
-//            g.setFont(timesNewRoman);
-//            g.drawString("Press ESCAPE to return to the main menu", 195, HEIGHT / 2 + 100);
-//
-//        }
-//
-//        // Make the game over screen
-//        if (gameOver == true) {
-//            g.setColor(Color.WHITE);
-//            g.setFont(biggerFont);
-//            g.drawString("GAME OVER", 105, HEIGHT / 2);
-//            g.setFont(timesNewRoman);
-//            g.drawString("Press ESCAPE to restart", 300, HEIGHT / 2 + 100);
-//        }
+        // Run the level
+        if (one == true) {
+            // Make the shooter
+            // g.setColor(Color.yellow);
+            // g.fillRect(shooter.x, shooter.y, shooter.width, shooter.height);
+            g.setColor(Color.WHITE);
+            int[] triangleX = {shooterX1, shooterX2, shooterX3};
+            int[] triangleY = {700, 625, 700};
+            g.fillPolygon(triangleX, triangleY, 3);
+
+            // Make the enemy ships
+            for (int i = 0; i < enemies.size(); i++) {
+                Rectangle p = enemies.get(i);
+                g.fillRect(p.x, p.y, p.width, p.height);
+            }
+
+            // Make the bullets
+            for (int i = 0; i < bullets.size(); i++) {
+                Rectangle p = bullets.get(i);
+                g.fillRect(p.x, p.y, p.width, p.height);
+            }
+        }
+        // Make a YOU WON! screen
+        if (youWon == true) {
+            g.setColor(Color.WHITE);
+            g.setFont(biggerFont);
+            g.drawString("YOU WON!", 175, HEIGHT / 2);
+            g.setFont(timesNewRoman);
+            g.drawString("Press ESCAPE to return to the main menu", 195, HEIGHT / 2 + 100);
+        }
+
+        // Make the game over screen
+        if (gameOver == true) {
+            g.setColor(Color.WHITE);
+            g.setFont(biggerFont);
+            g.drawString("GAME OVER", 105, HEIGHT / 2);
+            g.setFont(timesNewRoman);
+            g.drawString("Press ESCAPE to restart", 300, HEIGHT / 2 + 100);
+        }
         // GAME DRAWING ENDS HERE
     }
 
@@ -203,118 +196,119 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
     // This is run before the game loop begins!
     public void preSetup() {
         // Any of your pre setup before the loop starts should go here
-//        // Make the first row of enemies
-//        for (int i = 50; i < 900; i += 105) {
-//            enemies.add(new Rectangle(i, 100, 50, 50));
-//        }
-//        // Make the second row of enemies
-//        for (int i = 50; i < 900; i += 105) {
-//            enemies.add(new Rectangle(i, 200, 50, 50));
-//        }
+        // Make the first row of enemies
+        for (int i = 50; i < 900; i += 105) {
+            enemies.add(new Rectangle(i, 100, 50, 50));
+        }
+        // Make the second row of enemies
+        for (int i = 50; i < 900; i += 105) {
+            enemies.add(new Rectangle(i, 200, 50, 50));
+        }
     }
 
     // The main game loop
     // In here is where all the logic for my game will go
     public void gameLoop() {
-//        if (one == true) {
-//            titleScreen = false;
-//            levelOne();
-//        }
-//        if (gameOver == true) {
-//            one = false;
-//        }
-//        if (youWon == true) {
-//            one = false;
-//        }
-
+        if (levelSelect == true) {
+            titleScreen = false;
+        }
+        if (one == true) {
+            levelSelect = false;
+            levelOne();
+        }
+        if (gameOver == true) {
+            one = false;
+        }
+        if (youWon == true) {
+            one = false;
+        }
     }
 
     private void levelOne() {
-//        bulletDelay += 1;
-//
-//        moveShooter();
-//        shootBullets();
-//        moveEnemies();
-//        checkForCollision();
+        bulletDelay += 1;
+        moveShooter();
+        shootBullets();
+        moveEnemies();
+        checkForCollision();
 
     }
 
     private void moveShooter() {
-//        // Movements for the shooter
-//        if (moveLeft) {
-//            shooterX1 -= 3;
-//            shooterX2 -= 3;
-//            shooterX3 -= 3;
-//            shooter.x -= 3;
-//        } else if (moveRight) {
-//            shooterX1 += 3;
-//            shooterX2 += 3;
-//            shooterX3 += 3;
-//            shooter.x += 3;
-//        }
-//        if (shooterX1 > WIDTH) {
-//            shooterX1 = -100;
-//            shooterX2 = -50;
-//            shooterX3 = 0;
-//            shooter.x = -100;
-//        }
-//        if (shooterX3 < 0) {
-//            shooterX1 = 1000;
-//            shooterX2 = 1050;
-//            shooterX3 = 1100;
-//            shooter.x = 1000;
-//        }
+        // Movements for the shooter
+        if (moveLeft) {
+            shooterX1 -= 3;
+            shooterX2 -= 3;
+            shooterX3 -= 3;
+            shooter.x -= 3;
+        } else if (moveRight) {
+            shooterX1 += 3;
+            shooterX2 += 3;
+            shooterX3 += 3;
+            shooter.x += 3;
+        }
+        if (shooterX1 > WIDTH) {
+            shooterX1 = -100;
+            shooterX2 = -50;
+            shooterX3 = 0;
+            shooter.x = -100;
+        }
+        if (shooterX3 < 0) {
+            shooterX1 = 1000;
+            shooterX2 = 1050;
+            shooterX3 = 1100;
+            shooter.x = 1000;
+        }
     }
 
     private void shootBullets() {
-//        // Movements for the bullets
-//        // ADD A DELAY ON THE BULLETS
-//        for (int i = 0; i < bullets.size(); i++) {
-//            Rectangle b = bullets.get(i);
-//            b.y -= 1;
-//        }
+        // Movements for the bullets
+        // ADD A DELAY ON THE BULLETS
+        for (int i = 0; i < bullets.size(); i++) {
+            Rectangle b = bullets.get(i);
+            b.y -= 1;
+        }
     }
 
     private void moveEnemies() {
         // Makes it move slower
-//        if (System.currentTimeMillis() > enemyTimerLastTick + enemyDelay) {
-//            // Movements for the enemies
-//            for (int i = 0; i < enemies.size(); i++) {
-//                Rectangle e = enemies.get(i);
-//                e.y += 1;
-//            }
-//            enemyTimerLastTick = System.currentTimeMillis();
-//        }
+        if (System.currentTimeMillis() > enemyTimerLastTick + enemyDelay) {
+            // Movements for the enemies
+            for (int i = 0; i < enemies.size(); i++) {
+                Rectangle e = enemies.get(i);
+                e.y += 1;
+            }
+            enemyTimerLastTick = System.currentTimeMillis();
+        }
     }
 
     private void checkForCollision() {
         // Collision with bullets and enemies
-//        for (int i = 0; i < bullets.size(); i++) {
-//            for (int j = 0; j < enemies.size(); j++) {
-//                Rectangle b = bullets.get(i);
-//                Rectangle e = enemies.get(j);
-//                if (b.intersects(e)) {
-//                    bullets.remove(b);
-//                    enemies.remove(e);
-//                    break;
-//                }
-//            }
-//            if (enemies.isEmpty()) {
-//                youWon = true;
-//            }
-//        }
-//
-//        // Collision with enemies and shooter
-//        for (int x = 0; x < enemies.size(); x++) {
-//            Rectangle e = enemies.get(x);
-//            if (e.intersects(shooter)) {
-//                System.out.println("hit");
-//                shooterX1 = -100;
-//                shooterX2 = -100;
-//                shooterX3 = -100;
-//                gameOver = true;
-//            }
-//        }
+        for (int i = 0; i < bullets.size(); i++) {
+            for (int j = 0; j < enemies.size(); j++) {
+                Rectangle b = bullets.get(i);
+                Rectangle e = enemies.get(j);
+                if (b.intersects(e)) {
+                    bullets.remove(b);
+                    enemies.remove(e);
+                    break;
+                }
+            }
+            if (enemies.isEmpty()) {
+                youWon = true;
+            }
+        }
+
+        // Collision with enemies and shooter
+        for (int x = 0; x < enemies.size(); x++) {
+            Rectangle e = enemies.get(x);
+            if (e.intersects(shooter)) {
+                System.out.println("hit");
+                shooterX1 = -100;
+                shooterX2 = -100;
+                shooterX3 = -100;
+                gameOver = true;
+            }
+        }
     }
 
     // Used to implement any of the Mouse Actions
@@ -323,6 +317,19 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
         // if a mouse button has been pressed down
         @Override
         public void mousePressed(MouseEvent e) {
+            // See which level was clicked
+            if (e.getButton() == MouseEvent.BUTTON1) {
+                int mouseX = e.getX();
+                int mouseY = e.getY();
+                // for level one
+                if (mouseX >= 100 && mouseX <= 300 && mouseY >= 100 && mouseY <= 300) {
+                    one = true;
+                }
+                // for level two
+                if (mouseX >= 400 && mouseX <= 600 && mouseY >= 100 && mouseY <= 300) {
+                    two = true;
+                }
+            }
         }
 
         // if a mouse button has been released
@@ -348,107 +355,107 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
         @Override
         public void keyPressed(KeyEvent e) {
 
-//            // Get the keycode
-//            int keyCode = e.getKeyCode();
-//
-//            // Start the level
-//            if (keyCode == KeyEvent.VK_ENTER) {
-//                one = true;
-//            }
-//
-//            // To move the shooter
-//            if (keyCode == KeyEvent.VK_LEFT) {
-//                moveLeft = true;
-//            }
-//            if (keyCode == KeyEvent.VK_RIGHT) {
-//                moveRight = true;
-//            }
-//            // To shoot a bullet
-//            if (keyCode == KeyEvent.VK_SPACE) {
-//                if (bulletDelay > 40) {
-//                    bulletDelay = 0;
-//                    // Create a new bullet everytime the spacebar is pressed
-//                    bullets.add(new Rectangle(shooterX2 - 12, 625, 25, 50));
-//                }
-//            }
-//
-//            // To restart
-//            if (keyCode == KeyEvent.VK_ESCAPE) {
-//                if (gameOver == true) {
-//                    titleScreen = true;
-//                    gameOver = false;
-//                    
-//                    // Reset the Shooter
-//                    shooterX1 = 450;
-//                    shooterX2 = 500;
-//                    shooterX3 = 550;
-//
-//                    // Reset the collision detection rectangle behind it
-//                    shooter.x = 450;
-//
-//                    // Reset the first row
-//                    enemies.clear();
-//                    for (int j = 50; j < 900; j += 105) {
-//                        enemies.add(new Rectangle(j, 100, 50, 50));
-//                    }
-//
-//                    // Reset the second row
-//                    for (int i = 50; i < 900; i += 105) {
-//                        enemies.add(new Rectangle(i, 200, 50, 50));
-//                    }
-//
-//                    // Reset the bullets
-//                    bullets.clear();
-//                    for (int i = 0; i < bullets.size(); i++) {
-//                        Rectangle b = bullets.get(i);
-//                        b.y -= 1;
-//                    }
-//                }
-//
-//                if (youWon == true) {
-//                    titleScreen = true;
-//                    youWon = false;
-//
-//                    // Reset the Shooter
-//                    shooterX1 = 450;
-//                    shooterX2 = 500;
-//                    shooterX3 = 550;
-//
-//                    // Reset the collision detection rectangle behind it
-//                    shooter.x = 450;
-//
-//                    // Reset the first row
-//                    enemies.clear();
-//                    for (int j = 50; j < 900; j += 105) {
-//                        enemies.add(new Rectangle(j, 100, 50, 50));
-//                    }
-//
-//                    // Reset the second row
-//                    for (int i = 50; i < 900; i += 105) {
-//                        enemies.add(new Rectangle(i, 200, 50, 50));
-//                    }
-//
-//                    // Reset the bullets
-//                    bullets.clear();
-//                    for (int i = 0; i < bullets.size(); i++) {
-//                        Rectangle b = bullets.get(i);
-//                        b.y -= 1;
-//                    }
-//                }
-//            }
+            // Get the keycode
+            int keyCode = e.getKeyCode();
+
+            // Start the level
+            if (keyCode == KeyEvent.VK_ENTER) {
+                levelSelect = true;
+            }
+
+            // To move the shooter
+            if (keyCode == KeyEvent.VK_LEFT) {
+                moveLeft = true;
+            }
+            if (keyCode == KeyEvent.VK_RIGHT) {
+                moveRight = true;
+            }
+            // To shoot a bullet
+            if (keyCode == KeyEvent.VK_SPACE) {
+                if (bulletDelay > 30) {
+                    bulletDelay = 0;
+                    // Create a new bullet everytime the spacebar is pressed
+                    bullets.add(new Rectangle(shooterX2 - 12, 625, 25, 50));
+                }
+            }
+
+            // To restart
+            if (keyCode == KeyEvent.VK_ESCAPE) {
+                if (gameOver == true) {
+                    titleScreen = true;
+                    gameOver = false;
+
+                    // Reset the Shooter
+                    shooterX1 = 450;
+                    shooterX2 = 500;
+                    shooterX3 = 550;
+
+                    // Reset the collision detection rectangle behind it
+                    shooter.x = 450;
+
+                    // Reset the first row
+                    enemies.clear();
+                    for (int j = 50; j < 900; j += 105) {
+                        enemies.add(new Rectangle(j, 100, 50, 50));
+                    }
+
+                    // Reset the second row
+                    for (int i = 50; i < 900; i += 105) {
+                        enemies.add(new Rectangle(i, 200, 50, 50));
+                    }
+
+                    // Reset the bullets
+                    bullets.clear();
+                    for (int i = 0; i < bullets.size(); i++) {
+                        Rectangle b = bullets.get(i);
+                        b.y -= 1;
+                    }
+                }
+
+                if (youWon == true) {
+                    titleScreen = true;
+                    youWon = false;
+
+                    // Reset the Shooter
+                    shooterX1 = 450;
+                    shooterX2 = 500;
+                    shooterX3 = 550;
+
+                    // Reset the collision detection rectangle behind it
+                    shooter.x = 450;
+
+                    // Reset the first row
+                    enemies.clear();
+                    for (int j = 50; j < 900; j += 105) {
+                        enemies.add(new Rectangle(j, 100, 50, 50));
+                    }
+
+                    // Reset the second row
+                    for (int i = 50; i < 900; i += 105) {
+                        enemies.add(new Rectangle(i, 200, 50, 50));
+                    }
+
+                    // Reset the bullets
+                    bullets.clear();
+                    for (int i = 0; i < bullets.size(); i++) {
+                        Rectangle b = bullets.get(i);
+                        b.y -= 1;
+                    }
+                }
+            }
         }
 
         // if a key has been released
         @Override
         public void keyReleased(KeyEvent e) {
-//            int keyCode = e.getKeyCode();
-//            // To move the shooter
-//            if (keyCode == KeyEvent.VK_LEFT) {
-//                moveLeft = false;
-//            }
-//            if (keyCode == KeyEvent.VK_RIGHT) {
-//                moveRight = false;
-//            }
+            int keyCode = e.getKeyCode();
+            // To move the shooter
+            if (keyCode == KeyEvent.VK_LEFT) {
+                moveLeft = false;
+            }
+            if (keyCode == KeyEvent.VK_RIGHT) {
+                moveRight = false;
+            }
         }
     }
 
