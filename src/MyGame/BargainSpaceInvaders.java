@@ -151,10 +151,10 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
         }
 
         // Run the level
-        if (one == true) {
-            // Make the shooter
+        if (one == true || two == true || three == true || four == true || five == true) {
             // g.setColor(Color.yellow);
             // g.fillRect(shooter.x, shooter.y, shooter.width, shooter.height);
+            // Make the shooter
             g.setColor(Color.WHITE);
             int[] triangleX = {shooterX1, shooterX2, shooterX3};
             int[] triangleY = {700, 625, 700};
@@ -196,41 +196,46 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
     // This is run before the game loop begins!
     public void preSetup() {
         // Any of your pre setup before the loop starts should go here
-        // Make the first row of enemies
-        for (int i = 50; i < 900; i += 105) {
-            enemies.add(new Rectangle(i, 100, 50, 50));
-        }
-        // Make the second row of enemies
-        for (int i = 50; i < 900; i += 105) {
-            enemies.add(new Rectangle(i, 200, 50, 50));
-        }
     }
 
     // The main game loop
     // In here is where all the logic for my game will go
     public void gameLoop() {
+        // if (one == true || two == true || three == true || four == true || five == true) {
+
+        //}
+
         if (levelSelect == true) {
             titleScreen = false;
         }
-        if (one == true) {
+        if (one == true || two == true || three == true || four == true || five == true) {
             levelSelect = false;
-            levelOne();
+            levels();
         }
         if (gameOver == true) {
             one = false;
+            two = false;
+            three = false;
+            four = false;
+            five = false;
         }
         if (youWon == true) {
             one = false;
+            two = false;
+            three = false;
+            four = false;
+            five = false;
         }
     }
 
-    private void levelOne() {
+    private void levels() {
         bulletDelay += 1;
-        moveShooter();
-        shootBullets();
-        moveEnemies();
-        checkForCollision();
-
+        if (one == true || two == true || three == true || four == true || five == true) {
+            moveShooter();
+            shootBullets();
+            moveEnemies();
+            checkForCollision();
+        }
     }
 
     private void moveShooter() {
@@ -262,7 +267,6 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
 
     private void shootBullets() {
         // Movements for the bullets
-        // ADD A DELAY ON THE BULLETS
         for (int i = 0; i < bullets.size(); i++) {
             Rectangle b = bullets.get(i);
             b.y -= 1;
@@ -322,12 +326,37 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
                 int mouseX = e.getX();
                 int mouseY = e.getY();
                 // for level one
-                if (mouseX >= 100 && mouseX <= 300 && mouseY >= 100 && mouseY <= 300) {
+                if (mouseX >= 100 && mouseX <= 300 && mouseY >= 100 && mouseY <= 350) {
                     one = true;
                 }
                 // for level two
-                if (mouseX >= 400 && mouseX <= 600 && mouseY >= 100 && mouseY <= 300) {
+                if (mouseX >= 400 && mouseX <= 600 && mouseY >= 100 && mouseY <= 350) {
                     two = true;
+                }
+                if (levelSelect == true) {
+                    if (one == true) {
+                        for (int i = 50; i < 900; i += 105) {
+                            enemies.add(new Rectangle(i, 100, 50, 50));
+                        }
+                        // Make the second row of enemies
+                        for (int i = 50; i < 900; i += 105) {
+                            enemies.add(new Rectangle(i, 200, 50, 50));
+                        }
+                    }
+                    if (two == true) {
+                        // First row of enemies
+                        for (int i = 50; i < 900; i += 105) {
+                            enemies.add(new Rectangle(i, 0, 50, 50));
+                        }
+                        // Second row of enemies
+                        for (int i = 50; i < 900; i += 105) {
+                            enemies.add(new Rectangle(i, 100, 50, 50));
+                        }
+                        // Third row of enemies
+                        for (int i = 50; i < 900; i += 105) {
+                            enemies.add(new Rectangle(i, 200, 50, 50));
+                        }
+                    }
                 }
             }
         }
