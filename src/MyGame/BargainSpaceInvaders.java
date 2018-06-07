@@ -41,7 +41,7 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
     // Title Screen
     boolean titleScreen = true;
     Font titleFont = new Font("times new roman", Font.CENTER_BASELINE, 70);
-    // Rectangle playGame = new Rectangle(250, 450, 450, 50);
+    // Mouse coordinates
     int mouseX = 0;
     int mouseY = 0;
     // Level select screen
@@ -76,7 +76,7 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
     Font biggerFont = new Font("times new roman", Font.BOLD, 124);
     Font timesNewRoman = new Font("times new roman", Font.ITALIC, 36);
 
-    // GAME VARIABLES END HERE .
+    // GAME VARIABLES END HERE
     // Constructor to create the Frame and place the panel in
     // You will learn more about this in Grade 12 :)
     public BargainSpaceInvaders() {
@@ -116,6 +116,7 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
         g.clearRect(0, 0, WIDTH, HEIGHT);
 
         // GAME DRAWING GOES HERE
+
         // Create a background
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, WIDTH, HEIGHT);
@@ -125,12 +126,11 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
             g.setColor(Color.white);
             g.setFont(titleFont);
             g.drawString("BARGAIN SPACE INVADERS", 18, HEIGHT / 2);
-//            g.setColor(Color.white);
-//            g.fillRect(playGame.x, playGame.y, playGame.width, playGame.height);
-            g.setColor(Color.WHITE);
+            g.setColor(Color.white);
+            g.fillRect(350, 450, 300, 50);
+            g.setColor(Color.BLACK);
             g.setFont(timesNewRoman);
-            // Fix the wording
-            g.drawString("Press 'Enter' to start playing", 270, 485);
+            g.drawString("PLAY GAME", 405, 485);
         }
 
         // Draw the level select screen
@@ -178,7 +178,7 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
             g.setFont(biggerFont);
             g.drawString("YOU WON!", 175, HEIGHT / 2);
             g.setFont(timesNewRoman);
-            g.drawString("Press ESCAPE to return to the main menu", 195, HEIGHT / 2 + 100);
+            g.drawString("Press ESCAPE to return to the level select menu", 160, HEIGHT / 2 + 100);
         }
 
         // Make the game over screen
@@ -187,7 +187,7 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
             g.setFont(biggerFont);
             g.drawString("GAME OVER", 105, HEIGHT / 2);
             g.setFont(timesNewRoman);
-            g.drawString("Press ESCAPE to restart", 300, HEIGHT / 2 + 100);
+            g.drawString("Press ESCAPE to return to the level select menu", 160, HEIGHT / 2 + 100);
         }
         // GAME DRAWING ENDS HERE
     }
@@ -201,10 +201,6 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
     // The main game loop
     // In here is where all the logic for my game will go
     public void gameLoop() {
-        // if (one == true || two == true || three == true || four == true || five == true) {
-
-        //}
-
         if (levelSelect == true) {
             titleScreen = false;
         }
@@ -325,6 +321,13 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
             if (e.getButton() == MouseEvent.BUTTON1) {
                 int mouseX = e.getX();
                 int mouseY = e.getY();
+
+                if (titleScreen == true) {
+                    if (mouseX >= 350 && mouseX <= 650 && mouseY >= 450 && mouseY <= 500) {
+                        levelSelect = true;
+                    }
+                }
+
                 // for level one
                 if (mouseX >= 100 && mouseX <= 300 && mouseY >= 100 && mouseY <= 350) {
                     one = true;
@@ -333,7 +336,21 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
                 if (mouseX >= 400 && mouseX <= 600 && mouseY >= 100 && mouseY <= 350) {
                     two = true;
                 }
+                // for level three
+                if (mouseX >= 700 && mouseX <= 900 && mouseY >= 100 && mouseY <= 350) {
+                    three = true;
+                }
+                // for level four
+                if (mouseX >= 250 && mouseX <= 450 && mouseY >= 400 && mouseY <= 650) {
+                    four = true;
+                }
+                // for level five
+                if (mouseX >= 550 && mouseX <= 750 && mouseY >= 400 && mouseY <= 650) {
+                    five = true;
+                }
+
                 if (levelSelect == true) {
+                    // Add enemies for level one
                     if (one == true) {
                         for (int i = 50; i < 900; i += 105) {
                             enemies.add(new Rectangle(i, 100, 50, 50));
@@ -343,6 +360,7 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
                             enemies.add(new Rectangle(i, 200, 50, 50));
                         }
                     }
+                    // Add enemies for level two
                     if (two == true) {
                         // First row of enemies
                         for (int i = 50; i < 900; i += 105) {
@@ -353,6 +371,74 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
                             enemies.add(new Rectangle(i, 100, 50, 50));
                         }
                         // Third row of enemies
+                        for (int i = 50; i < 900; i += 105) {
+                            enemies.add(new Rectangle(i, 200, 50, 50));
+                        }
+                    }
+                    // Add enemies for level three
+                    if (three == true) {
+                        // First row of enemies
+                        for (int i = 50; i < 900; i += 105) {
+                            enemies.add(new Rectangle(i, -100, 50, 50));
+                        }
+                        // Second row of enemies
+                        for (int i = 50; i < 900; i += 105) {
+                            enemies.add(new Rectangle(i, 0, 50, 50));
+                        }
+                        // Third row of enemies
+                        for (int i = 50; i < 900; i += 105) {
+                            enemies.add(new Rectangle(i, 100, 50, 50));
+                        }
+                        // Fourth row of enemies
+                        for (int i = 50; i < 900; i += 105) {
+                            enemies.add(new Rectangle(i, 200, 50, 50));
+                        }
+                    }
+                    if (four == true){
+                        // First row of enemies
+                        for (int i = 50; i < 900; i += 105) {
+                            enemies.add(new Rectangle(i, -200, 50, 50));
+                        }
+                        // Second row of enemies
+                        for (int i = 50; i < 900; i += 105) {
+                            enemies.add(new Rectangle(i, -100, 50, 50));
+                        }
+                        // Third row of enemies
+                        for (int i = 50; i < 900; i += 105) {
+                            enemies.add(new Rectangle(i, 0, 50, 50));
+                        }
+                        // Fourth row of enemies
+                        for (int i = 50; i < 900; i += 105) {
+                            enemies.add(new Rectangle(i, 100, 50, 50));
+                        }
+                        // Fifth row of enemies
+                        for (int i = 50; i < 900; i += 105) {
+                            enemies.add(new Rectangle(i, 200, 50, 50));
+                        }
+                    }
+                    if (five == true){
+                        // CHECK ENEMY COLLISION AFTER RESTARTING
+                        // First row of enemies
+                        for (int i = 50; i < 900; i += 105) {
+                            enemies.add(new Rectangle(i, -300, 50, 50));
+                        }
+                        // Second row of enemies
+                        for (int i = 50; i < 900; i += 105) {
+                            enemies.add(new Rectangle(i, -200, 50, 50));
+                        }
+                        // Third row of enemies
+                        for (int i = 50; i < 900; i += 105) {
+                            enemies.add(new Rectangle(i, -100, 50, 50));
+                        }
+                        // Fourth row of enemies
+                        for (int i = 50; i < 900; i += 105) {
+                            enemies.add(new Rectangle(i, 0, 50, 50));
+                        }
+                        // Fifth row of enemies
+                        for (int i = 50; i < 900; i += 105) {
+                            enemies.add(new Rectangle(i, 100, 50, 50));
+                        }
+                        // Sixth row of enemies
                         for (int i = 50; i < 900; i += 105) {
                             enemies.add(new Rectangle(i, 200, 50, 50));
                         }
@@ -387,11 +473,6 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
             // Get the keycode
             int keyCode = e.getKeyCode();
 
-            // Start the level
-            if (keyCode == KeyEvent.VK_ENTER) {
-                levelSelect = true;
-            }
-
             // To move the shooter
             if (keyCode == KeyEvent.VK_LEFT) {
                 moveLeft = true;
@@ -410,8 +491,9 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
 
             // To restart
             if (keyCode == KeyEvent.VK_ESCAPE) {
+                // Reset the screen and return to the level select screen if the level is lost
                 if (gameOver == true) {
-                    titleScreen = true;
+                    levelSelect = true;
                     gameOver = false;
 
                     // Reset the Shooter
@@ -440,9 +522,9 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
                         b.y -= 1;
                     }
                 }
-
+                // Return to the level select screen and reset everything if the level is won
                 if (youWon == true) {
-                    titleScreen = true;
+                    levelSelect = true;
                     youWon = false;
 
                     // Reset the Shooter
