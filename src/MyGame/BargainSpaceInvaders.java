@@ -27,23 +27,30 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
     // Height and Width of our game
     static final int WIDTH = 1000;
     static final int HEIGHT = 800;
+    
     //Title of the window
     String title = "Bargain Space Invaders (WORKING TITLE)";
+    
     // sets the framerate and delay for our game
     // this calculates the number of milliseconds per frame
     // you just need to select an approproate framerate
     int desiredFPS = 60;
     int desiredTime = Math.round((1000 / desiredFPS));
+    
     // timer used to run the game loop
     // this is what keeps our time running smoothly :)
     Timer gameTimer;
+    
     // YOUR GAME VARIABLES WOULD GO HERE
+    
     // Title Screen
     boolean titleScreen = true;
     Font titleFont = new Font("times new roman", Font.CENTER_BASELINE, 70);
+    
     // Mouse coordinates
     int mouseX = 0;
     int mouseY = 0;
+    
     // Level select screen
     boolean levelSelect = false;
     Font levels = new Font("times new roman", Font.PLAIN, 250);
@@ -52,24 +59,31 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
     boolean three = false;
     boolean four = false;
     boolean five = false;
+    
     // Controls to move the shooter
     boolean moveLeft = false;
     boolean moveRight = false;
+    
     // Coordinates for the shooter
     int shooterX1 = 450;
     int shooterX2 = 500;
     int shooterX3 = 550;
+    
     // For the shooter/enemy collision
     Rectangle shooter = new Rectangle(450, 625, 100, 75);
+    
     // For the enemies
     ArrayList<Rectangle> enemies = new ArrayList<>();
     long enemyTimerLastTick = System.currentTimeMillis();
     int enemyDelay = 55;
+    
     // For the bullets
     ArrayList<Rectangle> bullets = new ArrayList<>();
     int bulletDelay = 0;
+    
     // YOU WON! screen
     boolean youWon = false;
+    
     // Game over screen
     boolean gameOver = false;
     boolean restart = false;
@@ -77,6 +91,7 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
     Font timesNewRoman = new Font("times new roman", Font.ITALIC, 36);
 
     // GAME VARIABLES END HERE
+    
     // Constructor to create the Frame and place the panel in
     // You will learn more about this in Grade 12 :)
     public BargainSpaceInvaders() {
@@ -152,8 +167,6 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
 
         // Run the level
         if (one == true || two == true || three == true || four == true || five == true) {
-            // g.setColor(Color.yellow);
-            // g.fillRect(shooter.x, shooter.y, shooter.width, shooter.height);
             // Make the shooter
             g.setColor(Color.WHITE);
             int[] triangleX = {shooterX1, shooterX2, shooterX3};
@@ -327,29 +340,27 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
                         levelSelect = true;
                     }
                 }
-
-                // for level one
-                if (mouseX >= 100 && mouseX <= 300 && mouseY >= 100 && mouseY <= 350) {
-                    one = true;
-                }
-                // for level two
-                if (mouseX >= 400 && mouseX <= 600 && mouseY >= 100 && mouseY <= 350) {
-                    two = true;
-                }
-                // for level three
-                if (mouseX >= 700 && mouseX <= 900 && mouseY >= 100 && mouseY <= 350) {
-                    three = true;
-                }
-                // for level four
-                if (mouseX >= 250 && mouseX <= 450 && mouseY >= 400 && mouseY <= 650) {
-                    four = true;
-                }
-                // for level five
-                if (mouseX >= 550 && mouseX <= 750 && mouseY >= 400 && mouseY <= 650) {
-                    five = true;
-                }
-
                 if (levelSelect == true) {
+                    // for level one
+                    if (mouseX >= 100 && mouseX <= 300 && mouseY >= 100 && mouseY <= 350) {
+                        one = true;
+                    }
+                    // for level two
+                    if (mouseX >= 400 && mouseX <= 600 && mouseY >= 100 && mouseY <= 350) {
+                        two = true;
+                    }
+                    // for level three
+                    if (mouseX >= 700 && mouseX <= 900 && mouseY >= 100 && mouseY <= 350) {
+                        three = true;
+                    }
+                    // for level four
+                    if (mouseX >= 250 && mouseX <= 450 && mouseY >= 400 && mouseY <= 650) {
+                        four = true;
+                    }
+                    // for level five
+                    if (mouseX >= 550 && mouseX <= 750 && mouseY >= 400 && mouseY <= 650) {
+                        five = true;
+                    }
                     // Add enemies for level one
                     if (one == true) {
                         for (int i = 50; i < 900; i += 105) {
@@ -394,7 +405,7 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
                             enemies.add(new Rectangle(i, 200, 50, 50));
                         }
                     }
-                    if (four == true){
+                    if (four == true) {
                         // First row of enemies
                         for (int i = 50; i < 900; i += 105) {
                             enemies.add(new Rectangle(i, -200, 50, 50));
@@ -416,7 +427,7 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
                             enemies.add(new Rectangle(i, 200, 50, 50));
                         }
                     }
-                    if (five == true){
+                    if (five == true) {
                         // CHECK ENEMY COLLISION AFTER RESTARTING
                         // First row of enemies
                         for (int i = 50; i < 900; i += 105) {
@@ -506,14 +517,14 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
 
                     // Reset the first row
                     enemies.clear();
-                    for (int j = 50; j < 900; j += 105) {
-                        enemies.add(new Rectangle(j, 100, 50, 50));
-                    }
+//                    for (int j = 50; j < 900; j += 105) {
+//                        enemies.add(new Rectangle(j, 100, 50, 50));
+//                    }
 
                     // Reset the second row
-                    for (int i = 50; i < 900; i += 105) {
-                        enemies.add(new Rectangle(i, 200, 50, 50));
-                    }
+//                    for (int i = 50; i < 900; i += 105) {
+//                        enemies.add(new Rectangle(i, 200, 50, 50));
+//                    }
 
                     // Reset the bullets
                     bullets.clear();
@@ -537,14 +548,14 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
 
                     // Reset the first row
                     enemies.clear();
-                    for (int j = 50; j < 900; j += 105) {
-                        enemies.add(new Rectangle(j, 100, 50, 50));
-                    }
+//                    for (int j = 50; j < 900; j += 105) {
+//                        enemies.add(new Rectangle(j, 100, 50, 50));
+//                    }
 
                     // Reset the second row
-                    for (int i = 50; i < 900; i += 105) {
-                        enemies.add(new Rectangle(i, 200, 50, 50));
-                    }
+//                    for (int i = 50; i < 900; i += 105) {
+//                        enemies.add(new Rectangle(i, 200, 50, 50));
+//                    }
 
                     // Reset the bullets
                     bullets.clear();
