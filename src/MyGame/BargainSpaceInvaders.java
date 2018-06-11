@@ -15,7 +15,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
 import javax.swing.Timer;
 
 /**
@@ -89,9 +92,11 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
     boolean restart = false;
     Font biggerFont = new Font("times new roman", Font.BOLD, 124);
     Font timesNewRoman = new Font("times new roman", Font.ITALIC, 36);
+    
+    BufferedImage enemyImage = loadImage("Space Enemy.png");
+    
 
     // GAME VARIABLES END HERE
-    
     // Constructor to create the Frame and place the panel in
     // You will learn more about this in Grade 12 :)
     public BargainSpaceInvaders() {
@@ -120,6 +125,17 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
         gameTimer = new Timer(desiredTime, this);
         gameTimer.setRepeats(true);
         gameTimer.start();
+    }
+
+    public BufferedImage loadImage(String name) {
+        BufferedImage img = null;
+        try {
+            img = ImageIO.read(new File(name));
+        } catch (Exception e) {
+            System.out.println("Error reading file");
+            e.printStackTrace();
+        }
+        return img;
     }
 
     // drawing of the game happens in here
@@ -176,7 +192,9 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
             // Make the enemy ships
             for (int i = 0; i < enemies.size(); i++) {
                 Rectangle p = enemies.get(i);
-                g.fillRect(p.x, p.y, p.width, p.height);
+                // g.fillRect(p.x, p.y, p.width, p.height);
+                //draw emeny
+                g.drawImage(enemyImage, p.x, p.y, p.width, p.height, null);
             }
 
             // Make the bullets
@@ -222,11 +240,17 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
             levels();
         }
         if (gameOver == true) {
-            one = false;
-            two = false;
-            three = false;
-            four = false;
-            five = false;
+            if (one == true) {
+                one = false;
+            } else if (two == true) {
+                two = false;
+            } else if (three == true) {
+                three = false;
+            }else if (four  == true) {
+                four = false;
+            }else if (five == true) {
+                five = false;
+            }
         }
         if (youWon == true) {
             one = false;
@@ -428,7 +452,6 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
                         }
                     }
                     if (five == true) {
-                        // CHECK ENEMY COLLISION AFTER RESTARTING
                         // First row of enemies
                         for (int i = 50; i < 900; i += 105) {
                             enemies.add(new Rectangle(i, -300, 50, 50));
@@ -493,7 +516,7 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
             }
             // To shoot a bullet
             if (keyCode == KeyEvent.VK_SPACE) {
-                if (bulletDelay > 30) {
+                if (bulletDelay > 40) {
                     bulletDelay = 0;
                     // Create a new bullet everytime the spacebar is pressed
                     bullets.add(new Rectangle(shooterX2 - 12, 625, 25, 50));
@@ -517,14 +540,7 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
 
                     // Reset the first row
                     enemies.clear();
-//                    for (int j = 50; j < 900; j += 105) {
-//                        enemies.add(new Rectangle(j, 100, 50, 50));
-//                    }
 
-                    // Reset the second row
-//                    for (int i = 50; i < 900; i += 105) {
-//                        enemies.add(new Rectangle(i, 200, 50, 50));
-//                    }
 
                     // Reset the bullets
                     bullets.clear();
@@ -548,14 +564,7 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
 
                     // Reset the first row
                     enemies.clear();
-//                    for (int j = 50; j < 900; j += 105) {
-//                        enemies.add(new Rectangle(j, 100, 50, 50));
-//                    }
 
-                    // Reset the second row
-//                    for (int i = 50; i < 900; i += 105) {
-//                        enemies.add(new Rectangle(i, 200, 50, 50));
-//                    }
 
                     // Reset the bullets
                     bullets.clear();
