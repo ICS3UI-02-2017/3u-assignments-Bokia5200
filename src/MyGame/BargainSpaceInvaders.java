@@ -32,7 +32,7 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
     static final int HEIGHT = 800;
     
     //Title of the window
-    String title = "Bargain Space Invaders (WORKING TITLE)";
+    String title = "Bargain Space Invaders";
     
     // sets the framerate and delay for our game
     // this calculates the number of milliseconds per frame
@@ -93,10 +93,11 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
     Font biggerFont = new Font("times new roman", Font.BOLD, 124);
     Font timesNewRoman = new Font("times new roman", Font.ITALIC, 36);
     
+    // Load in the space enemy image
     BufferedImage enemyImage = loadImage("Space Enemy.png");
-    
 
     // GAME VARIABLES END HERE
+    
     // Constructor to create the Frame and place the panel in
     // You will learn more about this in Grade 12 :)
     public BargainSpaceInvaders() {
@@ -232,26 +233,24 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
     // The main game loop
     // In here is where all the logic for my game will go
     public void gameLoop() {
+        // Run the level screen once play game is clicked
         if (levelSelect == true) {
             titleScreen = false;
         }
+        // Run the level
         if (one == true || two == true || three == true || four == true || five == true) {
             levelSelect = false;
             levels();
         }
+        // Stop running the level if the player loses
         if (gameOver == true) {
-            if (one == true) {
-                one = false;
-            } else if (two == true) {
-                two = false;
-            } else if (three == true) {
-                three = false;
-            }else if (four  == true) {
-                four = false;
-            }else if (five == true) {
-                five = false;
-            }
+            one = false;
+            two = false;
+            three = false;
+            four = false;
+            five = false;
         }
+        // Stop running the level if the player wins
         if (youWon == true) {
             one = false;
             two = false;
@@ -259,10 +258,18 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
             four = false;
             five = false;
         }
+        // If the enemies leave the screen, end the game
+        for (int i = 0; i < enemies.size(); i++) {
+            Rectangle e = enemies.get(i);
+            if (e.y + e.height > HEIGHT) {
+                gameOver = true;
+            }
+        }
     }
 
     private void levels() {
         bulletDelay += 1;
+        // Run all the basic stuff behind each level
         if (one == true || two == true || three == true || four == true || five == true) {
             moveShooter();
             shootBullets();
@@ -284,6 +291,7 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
             shooterX3 += 3;
             shooter.x += 3;
         }
+        // Move the shooter back onto the screen if it leaves
         if (shooterX1 > WIDTH) {
             shooterX1 = -100;
             shooterX2 = -50;
@@ -324,12 +332,14 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
             for (int j = 0; j < enemies.size(); j++) {
                 Rectangle b = bullets.get(i);
                 Rectangle e = enemies.get(j);
+                // Remove the enemies and bullets from the array list if they come in contact
                 if (b.intersects(e)) {
                     bullets.remove(b);
                     enemies.remove(e);
                     break;
                 }
             }
+            // Player wins the level if all enemies are destroyed
             if (enemies.isEmpty()) {
                 youWon = true;
             }
@@ -338,6 +348,7 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
         // Collision with enemies and shooter
         for (int x = 0; x < enemies.size(); x++) {
             Rectangle e = enemies.get(x);
+            // Trigger game over if the shooter is hit by the enemy
             if (e.intersects(shooter)) {
                 System.out.println("hit");
                 shooterX1 = -100;
@@ -359,6 +370,7 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
                 int mouseX = e.getX();
                 int mouseY = e.getY();
 
+                // "Play Game" Button
                 if (titleScreen == true) {
                     if (mouseX >= 350 && mouseX <= 650 && mouseY >= 450 && mouseY <= 500) {
                         levelSelect = true;
