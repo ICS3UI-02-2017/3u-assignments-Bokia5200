@@ -197,7 +197,6 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
                 //draw emeny
                 g.drawImage(enemyImage, p.x, p.y, p.width, p.height, null);
             }
-
             // Make the bullets
             for (int i = 0; i < bullets.size(); i++) {
                 Rectangle p = bullets.get(i);
@@ -212,7 +211,6 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
             g.setFont(timesNewRoman);
             g.drawString("Press ESCAPE to return to the level select menu", 160, HEIGHT / 2 + 100);
         }
-
         // Make the game over screen
         if (gameOver == true) {
             g.setColor(Color.WHITE);
@@ -515,7 +513,6 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
         // if a key has been pressed down
         @Override
         public void keyPressed(KeyEvent e) {
-
             // Get the keycode
             int keyCode = e.getKeyCode();
 
@@ -534,7 +531,6 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
                     bullets.add(new Rectangle(shooterX2 - 12, 625, 25, 50));
                 }
             }
-
             // To restart
             if (keyCode == KeyEvent.VK_ESCAPE) {
                 // Reset the screen and return to the level select screen if the level is lost
@@ -552,7 +548,6 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
 
                     // Reset the first row
                     enemies.clear();
-
 
                     // Reset the bullets
                     bullets.clear();
@@ -576,8 +571,7 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
 
                     // Reset the first row
                     enemies.clear();
-
-
+                    
                     // Reset the bullets
                     bullets.clear();
                     for (int i = 0; i < bullets.size(); i++) {
