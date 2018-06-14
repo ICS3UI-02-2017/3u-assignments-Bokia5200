@@ -193,8 +193,7 @@ public class BargainSpaceInvaders extends JComponent implements ActionListener {
             // Make the enemy ships
             for (int i = 0; i < enemies.size(); i++) {
                 Rectangle p = enemies.get(i);
-                // g.fillRect(p.x, p.y, p.width, p.height);
-                //draw emeny
+                //draw enemy
                 g.drawImage(enemyImage, p.x, p.y, p.width, p.height, null);
             }
             // Make the bullets
